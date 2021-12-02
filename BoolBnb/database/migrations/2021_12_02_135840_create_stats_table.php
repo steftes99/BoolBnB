@@ -16,7 +16,7 @@ class CreateStatsTable extends Migration
         Schema::create('stats', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('apartment_id');
-            $table->string('ip');
+            $table->ipAddress('ip');
             $table->date('date');
             $table->timestamps();
 
