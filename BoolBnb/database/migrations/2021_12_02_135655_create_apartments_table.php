@@ -25,8 +25,8 @@ class CreateApartmentsTable extends Migration
             $table->string('region', 100);
             $table->string('country', 100);
             $table->string('address', 255);
-            $table->string('lat', 100);
-            $table->string('long', 100);
+            $table->decimal('lat',8,6);
+            $table->decimal('long', 9,6);
             $table->text('image');
             $table->boolean('visible');
             $table->timestamps();
