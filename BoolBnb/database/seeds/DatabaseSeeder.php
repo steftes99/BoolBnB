@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             ApartmentsTableSeeder::class,
             FacilitiesTableSeeder::class,
             SponsorshipsTableSeeder::class,
+            MessagesTableSeeder::class,
+            StatsTableSeeder::class,
         ]);
        
     }
