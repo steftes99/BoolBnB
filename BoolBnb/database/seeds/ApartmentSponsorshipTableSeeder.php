@@ -19,7 +19,10 @@ class ApartmentSponsorshipTableSeeder extends Seeder
         $apartments = Apartment::all();
 
         foreach($apartments as $apartment){
+            $now = Carbon::now();
             $apartment->sponsorships()->sync(Arr::random($sponsorship_ids));
+            // $apartment->sponsorships()->start_date->sync($now);
+            // $apartment->sponsorships()->end_date = $now->addHours($apartment->sponsorships()->duration);
         }
 
         
