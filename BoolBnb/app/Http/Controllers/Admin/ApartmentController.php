@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\Facility;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {   
@@ -28,8 +31,17 @@ class ApartmentController extends Controller
      public function index()
     {
         $apartments = Apartment::all();
-
-        return view('admin.apartments.index', compact('apartments'));
+        
+        
+            $imagePrefix = '';
+            if(!str_starts_with($apartments->image ,'http')){
+                $imagePrefix = asset('storage/'.$apartments->image);
+            }else{
+                $imagePrefix = $apartments->image;
+            }
+        
+        
+        return view('admin.apartments.index', compact('apartments', 'imagePrefix'));
     }
 
     /**
@@ -39,7 +51,9 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+       $facilities = Facility::all();
+
+        return view('admin.apartments.create', compact('facilities'));
     }
 
     /**
@@ -50,7 +64,25 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dump($request);
+
+       
+
+        $data = $request->all();
+
+        $data['user_id'] = Auth::user()->id;
+
+        $data['image'] = Storage::put('apartments/images', $data['image']);
+
+        $apartment = new Apartment();
+
+        $apartment->fill($data);
+
+        $apartment->save();
+
+        if(array_key_exists('facilities', $data)) $apartment->facilities()->sync($data['facilities']);
+
+        return redirect()->route('admin.apartments.show', $apartment->id);
     }
 
     /**
@@ -61,7 +93,16 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', compact('apartment'));
+        $facilities = Facility::all();
+
+        $imagePrefix = '';
+        if(!str_starts_with($apartment->image ,'http')){
+            $imagePrefix = asset('storage/'.$apartment->image);
+        }else{
+            $imagePrefix = $apartment->image;
+        }
+
+        return view('admin.apartments.show', compact('apartment', 'facilities', 'imagePrefix'));
     }
 
     /**
