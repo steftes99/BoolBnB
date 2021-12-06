@@ -7,16 +7,23 @@
                 @foreach ($apartments as $apartment)
                 
                 <div class="card col-3 m-3" style="width: 18rem;">
-                    <img src="{{$imagePrefix}}" class="card-img-top" alt="...">
+                
+                 @if (!str_starts_with($apartment->image ,'http'))
+                    <img src="{{asset('storage/'.$apartment->image)}}" class="card-img-top" alt="{{$apartment->name}}">
+                 @else
+                    <img src="{{$apartment->image}}" class="card-img-top" alt="{{$apartment->name}}">
+                 @endif                    
                     <div class="card-body">
                       <h5 class="card-title">{{ $apartment->title }}</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                       <a href="{{ route('admin.apartments.show', $apartment->id) }}" class="btn btn-primary">Go somewhere</a>
                     </div>
-                  </div>
+                </div>
                 @endforeach
             
         </div>
         
     </div>
 @endsection
+
+

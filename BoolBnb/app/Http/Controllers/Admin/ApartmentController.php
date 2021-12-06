@@ -33,15 +33,7 @@ class ApartmentController extends Controller
         $apartments = Apartment::all();
         
         
-            $imagePrefix = '';
-            if(!str_starts_with($apartments->image ,'http')){
-                $imagePrefix = asset('storage/'.$apartments->image);
-            }else{
-                $imagePrefix = $apartments->image;
-            }
-        
-        
-        return view('admin.apartments.index', compact('apartments', 'imagePrefix'));
+        return view('admin.apartments.index', compact('apartments'));
     }
 
     /**
