@@ -56,9 +56,54 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        dump($request);
+        $request->validate([
+            // la chiave sarò il name corrispondente nel blade.php
+            // il valore sarà la lista dei requisiti per la validazione
+            'title' => 'required|string|unique:apartments|min:5|max:255',
+            'city' => 'required|string|min:2|max:100',
+            'region' => 'required|string|min:5|max:100',
+            'country' => 'required|string|min:2|max:100',
+            'address' => 'required|string|min:5|max:150',
+            'image' => "required|image",
+            'rooms' => "required|integer|between:1,20",
+            'bathrooms' => "required|integer|between:1,20",
+            'beds' => "required|integer|between:1,40",
+            'square' => "required|integer|between:15,500",
+            'facilities' => 'nullable|exists:facilities,id'
+        ],
+        [
+            "title.required" => 'Non è possibile inserire un appartamento senza titolo',
+            "title.min" => 'Inserisci almeno 5 caratteri per la descrizione del titolo',
+            "title.max" => 'Puoi inserire massimo 255 caratteri per la descrizione del titolo',
+            "title.unique" => 'Questa descrizione già esiste',
+            "city.required" => 'Inserisci la città',
+            "city.min" => 'Inserisci almeno 2 caratteri per il campo città',
+            "city.max" => 'Puoi inserire massimo 100 caratteri per il campo città',
+            "region.required" => 'Inserisci la regione',
+            "region.min" => 'Inserisci almeno 5 caratteri per il campo regione',
+            "region.max" => 'Puoi inserire massimo 100 caratteri per il campo regione',
+            "country.required" => 'Inserisci lo stato',
+            "country.min" => 'Inserisci almeno 2 caratteri per il campo stato',
+            "country.max" => 'Puoi inserire massimo 100 caratteri per il campo stato',
+            "address.required" => 'Non è possibile inserire un appartamento senza indirizzo',
+            "address.min" => 'Inserisci almeno 5 caratteri per l\'indirizzo',
+            "address.max" => 'Puoi inserire massimo 150 caratteri per l\'indirizzo',
+            "image.required" => 'Non è possibile inserire un appartamento senza immagine',
+            "image.image" => 'Devi inserire un file immagine',
+            "rooms.required" => 'Inserisci il numero di stanze',
+            "rooms.between" => 'Inserisci un numero di stanze compreso tra 1 e 20',
+            "rooms.integer" => 'Puoi inserire solo numeri nel campo stanze',
+            "bathrooms.required" => 'Inserisci il numero di bagni',
+            "bathrooms.between" => 'Inserisci un numero di bagni compreso tra 1 e 20',
+            "bathrooms.integer" => 'Puoi inserire solo numeri nel campo bagni',
+            "beds.required" => 'Inserisci il numero di posti letto',
+            "beds.between" => 'Inserisci un numero di posti letto compreso tra 1 e 40',
+            "beds.integer" => 'Puoi inserire solo numeri nel campo posti letto',
+            "square.required" => 'Inserisci i metri quadri',
+            "square.between" => 'I metri quadri devono essere compresi tra 15 e 500',
+            "square.integer" => 'Puoi inserire solo numeri nel campo metri quadri'
+        ]);
 
-       
 
         $data = $request->all();
 
