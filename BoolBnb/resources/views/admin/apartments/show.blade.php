@@ -29,7 +29,7 @@
                   </div>
                  
                   <a href="{{route('admin.apartments.index')}}">Torna indietro</a>
-                  
+                  <a class="btn btn-primary" href="{{route('admin.apartments.edit', ['apartment' => $apartment->id])}}">Modifica</a>
                 </div>
               </div>
             </div>
