@@ -32,8 +32,10 @@ class ApartmentController extends Controller
      public function index()
     {
         $apartments = Apartment::all();
-        
-        
+
+        // SELECT * FROM 'apartments' WHERE user_id = user_id dell'utente corrente
+        $apartments = Apartment::where('user_id', Auth::user()->id)->paginate(6);
+    
         return view('admin.apartments.index', compact('apartments'));
     }
 
@@ -245,8 +247,13 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        if ($apartment->facilities) $apartment->facilities()->detach();
+        if ($apartment->sponsorships) $apartment->sponsorships()->detach();
+
+        $apartment->delete();
+
+        return redirect()->route('admin.apartments.index')->with("deleted_apartment", $apartment->title )->with('alert-message', "$apartment->title è stato eliminato con successo");
     }
 }

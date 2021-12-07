@@ -20,6 +20,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::namespace("Guest")
+    ->prefix('guest') 
+    ->name('guest.') 
+    ->group(function(){ 
+        Route::resource('apartments', ApartmentController::class)->only(['index', 'show']);
+});
 
 Route::middleware('auth')  // devi essere autenticato
     ->namespace("Admin") // prendi i controller delle route tue figlie a partire dalla cartella Admin/
@@ -27,9 +33,9 @@ Route::middleware('auth')  // devi essere autenticato
     ->name('admin.') // inserisci come prefisso per ogni nome di tutte le route figlie admin.
     ->group(function(){ // e raggruppale in:
         Route::resource('apartments', ApartmentController::class);
-        
+        Route::get('/', 'HomeController@index')->name('home');
 });
 
 Route::get("{any?}", function(){
-    return view('guests.home');
+    return view('welcome');
 })->where("any", ".*");

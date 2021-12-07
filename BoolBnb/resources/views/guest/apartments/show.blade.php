@@ -28,15 +28,7 @@
                   @endforeach
                   </div>
                  
-                  <a href="{{route('admin.apartments.index')}}">Torna indietro</a>
-                  <a class="btn btn-primary" href="{{route('admin.apartments.edit', ['apartment' => $apartment->id])}}">Modifica</a>
-                  <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id ]) }}" 
-                    method="POST"
-                    class="delete-form">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Elimina</button>
-                    </form>
+                  <a href="{{route('guest.apartments.index')}}">Torna indietro</a>
                 </div>
               </div>
             </div>

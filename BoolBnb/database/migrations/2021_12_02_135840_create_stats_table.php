@@ -15,14 +15,15 @@ class CreateStatsTable extends Migration
     {
         Schema::create('stats', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('apartment_id');
+            $table->unsignedBigInteger('apartment_id')->nullable();
             $table->ipAddress('ip');
             $table->date('date');
             $table->timestamps();
 
             $table->foreign('apartment_id')
             ->references('id')
-            ->on('apartments');
+            ->on('apartments')
+            ->onDelete('set null');
         });
     }
 
