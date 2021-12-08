@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Apartment;
+use App\Models\ApartmentSponsorship;
 use App\Models\Sponsorship;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -17,13 +18,15 @@ class ApartmentSponsorshipTableSeeder extends Seeder
     {
         $sponsorship_ids = Sponsorship::pluck('id')->toArray();
         $apartments = Apartment::with('sponsorships')->get();
-        /* $apartments = Apartment::all(); */
 
         foreach($apartments as $apartment){
-            $now = Carbon::now();
-            $apartment->sponsorships()->sync(Arr::random($sponsorship_ids));
-            /* $apartment->sponsorships()->start_date = $now;
-            $apartment->sponsorships()->end_date = $now->addHours(1); */
+            /* $apartment->sponsorships()->sync(Arr::random($sponsorship_ids)); */
+            
+            $apartment->sponsorships()->attach($apartment ,[
+                'sponsorship_id' => Arr::random($sponsorship_ids),
+                'start_date' => Carbon::now(),
+                'end_date' => Carbon::now()->addHours(72),
+            ]);
         }
     }
 }

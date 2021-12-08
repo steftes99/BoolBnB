@@ -16,7 +16,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::paginate(6);
+        $apartments = Apartment::with('sponsorships')->paginate(6);
     
         return view('guest.apartments.index', compact('apartments'));
     }
