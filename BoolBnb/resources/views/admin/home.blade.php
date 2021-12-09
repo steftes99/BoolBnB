@@ -19,6 +19,10 @@
                     <a href="{{route('admin.apartments.index')}}">Vai ai tuoi appartamenti</a>
                 </div>
             </div>
+            
+        </div>
+        <div class="col-12 text-center p-5">
+            <a class="btn btn-primary" href="{{route('admin.apartments.create')}}">Aggiungi un appartamento</a>
         </div>
     </div>
 </div>

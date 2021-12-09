@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Guest;
 
+use App\Models\Sponsorship;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Facility;

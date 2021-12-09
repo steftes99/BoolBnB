@@ -18,15 +18,16 @@ class ApartmentSponsorshipTableSeeder extends Seeder
     {
         $sponsorship_ids = Sponsorship::pluck('id')->toArray();
         $apartments = Apartment::with('sponsorships')->get();
+        $sponsorships = Sponsorship::pluck('hour_duration','id')->toArray();
 
         foreach($apartments as $apartment){
-            /* $apartment->sponsorships()->sync(Arr::random($sponsorship_ids)); */
             
             $apartment->sponsorships()->attach($apartment ,[
                 'sponsorship_id' => Arr::random($sponsorship_ids),
                 'start_date' => Carbon::now(),
-                'end_date' => Carbon::now()->addHours(72),
+                'end_date' => Carbon::now()->addHours(Arr::random($sponsorships)),
             ]);
         }
+
     }
 }
