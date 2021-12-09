@@ -1920,6 +1920,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Apartment',
   props: ['apartment'],
@@ -37600,22 +37602,41 @@ var render = function () {
     "div",
     { staticClass: "card col-3 m-3", staticStyle: { width: "18rem" } },
     [
-      _c("img", { attrs: { src: _vm.apartment.image, alt: "" } }),
+      _c("h5", { staticClass: "card-title" }, [
+        _vm._v(_vm._s(_vm.apartment.title)),
+      ]),
+      _vm._v(" "),
+      _c("img", {
+        attrs: {
+          src: _vm.apartment.image.startsWith("apartments/images")
+            ? "http://127.0.0.1:8000/storage/" + _vm.apartment.image
+            : _vm.apartment.image,
+          alt: "Ciao",
+        },
+      }),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c("h5", { staticClass: "card-title" }, [
-          _vm._v(_vm._s(_vm.apartment.title)),
+        _c("p", { staticClass: "card-text" }, [
+          _c("strong", [_vm._v("Città:")]),
+          _vm._v(" " + _vm._s(_vm.apartment.city)),
         ]),
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
-          _vm._v(
-            "Some quick example text to build on the card title and make up the bulk of the card's content."
-          ),
+          _c("strong", [_vm._v("Regione:")]),
+          _vm._v(_vm._s(_vm.apartment.region)),
         ]),
         _vm._v(" "),
-        _c("a", { staticClass: "btn btn-primary", attrs: { href: "" } }, [
-          _vm._v("Go somewhere"),
-        ]),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary",
+            attrs: {
+              href:
+                "http://127.0.0.1:8000/guest/apartments/" + _vm.apartment.id,
+            },
+          },
+          [_vm._v("Maggiori informazioni")]
+        ),
       ]),
     ]
   )

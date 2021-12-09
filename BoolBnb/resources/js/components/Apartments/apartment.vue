@@ -1,11 +1,13 @@
 <template>
     <div class="card col-3 m-3" style="width: 18rem;">
-            
-        <img :src= "apartment.image" alt="">                   
+        <h5 class="card-title">{{ apartment.title }}</h5> 
+        <img :src=" apartment.image.startsWith('apartments/images') ? 'http://127.0.0.1:8000/storage/'+ apartment.image : apartment.image " 
+        alt="Ciao">                   
         <div class="card-body">
-            <h5 class="card-title">{{ apartment.title }}</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="" class="btn btn-primary">Go somewhere</a>
+            
+            <p class="card-text"> <strong>Città:</strong> {{ apartment.city }}</p>
+            <p class="card-text"><strong>Regione:</strong>{{ apartment.region }}</p>
+            <a :href="'http://127.0.0.1:8000/guest/apartments/' + apartment.id" class="btn btn-primary">Maggiori informazioni</a>
         </div>
 
     </div>
