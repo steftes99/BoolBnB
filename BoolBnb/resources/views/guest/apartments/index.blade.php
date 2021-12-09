@@ -7,7 +7,6 @@
                 {{session('alert-message')}}
             </div>
         @endif
-        Prova
         <div class="row">
                 @foreach ($apartments as $apartment)
                 
