@@ -1,7 +1,7 @@
 <template>
     <section id="apartment-list">
         <h1 class="text-center">Appartamenti</h1>
-            <div class="left-searchbar">
+            <div class="left-searchbar ">
                 <input id="contacts-filter" class="left-searchbar-input" type="text"
                 placeholder="Cerca la città" name="search" v-model="search" >
                 <button @click="searchApartment(search)" class="btn btn-primary">Cerca</button>
