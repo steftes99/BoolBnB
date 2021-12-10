@@ -49652,7 +49652,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./resources/js/components/ExampleComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue ***!
@@ -49664,8 +49663,6 @@ throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.j
 
 /***/ }),
 
-=======
->>>>>>> 0c04751f66767a4c621dbecc5bc988ded448eec7
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
