@@ -49594,7 +49594,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49652,17 +49651,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/ExampleComponent.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/ExampleComponent.vue ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\resources\\js\\components\\ExampleComponent.vue'");
-
-/***/ }),
-
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49670,7 +49658,7 @@ throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.j
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleNotFoundError: Module not found: Error: Can't resolve '@fortawesome/fontawesome-free/css/all.css' in 'C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\resources\\sass'\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\webpack\\lib\\Compilation.js:925:10\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\webpack\\lib\\NormalModuleFactory.js:401:22\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\webpack\\lib\\NormalModuleFactory.js:130:21\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\webpack\\lib\\NormalModuleFactory.js:224:22\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\neo-async\\async.js:2830:7\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\neo-async\\async.js:6877:13\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\webpack\\lib\\NormalModuleFactory.js:214:25\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:213:14\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\UnsafeCachePlugin.js:44:7\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:27:1)\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\DescriptionFilePlugin.js:67:43\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:43:1)\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\ModuleKindPlugin.js:30:40\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\forEachBail.js:30:14\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\UnsafeCachePlugin.js:44:7\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:27:1)\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\DescriptionFilePlugin.js:67:43\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:16:1)\n    at C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\enhanced-resolve\\lib\\RootPlugin.js:37:38\n    at _next43 (eval at create (C:\\Users\\User\\Desktop\\BoolBnB\\BoolBnB\\BoolBnB\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:8:1)");
 
 /***/ }),
 
