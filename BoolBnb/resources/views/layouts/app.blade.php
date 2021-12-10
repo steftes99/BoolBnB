@@ -74,14 +74,10 @@
           </nav>
     </header>
 
-
+    <main>
+        @yield('content')
+    </main>
     <div id="app">
-       
-     
-
-        <main>
-            @yield('content')
-        </main>
     </div>
     <footer>
         <footer class="position-relative z-index-10 d-print-none">
