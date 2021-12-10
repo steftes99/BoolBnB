@@ -22,7 +22,7 @@ import Apartment from './apartment';
         data() {
             return {
                 apartments: [],
-                searchCity: "",
+                search: "",
 
             }
         },
