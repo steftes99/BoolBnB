@@ -5,7 +5,7 @@
         <div class="card mb-3">
             <div class="row no-gutters">
               <div class="col-md-4">
-                <img src="{{$imagePrefix}}" style="width: 100%" alt="...">
+                <img src="{{$imagePrefix}}" style="width: 100%" alt="{{$apartment->title}} image">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -59,5 +59,8 @@ let marker = new tt.Marker()
   {{$apartment->lat}}
 ])
 .addTo(map);
+marker.setPopup(new tt.Popup().setHTML('{{$apartment->title}}'));
+
+
 </script>
 @endsection
