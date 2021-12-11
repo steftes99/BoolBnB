@@ -38344,7 +38344,7 @@ var render = function () {
   return _c("section", { attrs: { id: "apartment-list" } }, [
     _c("h1", { staticClass: "text-center" }, [_vm._v("Appartamenti")]),
     _vm._v(" "),
-    _c("div", { staticClass: "left-searchbar" }, [
+    _c("div", { staticClass: "left-searchbar " }, [
       _c("input", {
         directives: [
           {
