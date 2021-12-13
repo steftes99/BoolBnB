@@ -3,25 +3,26 @@
         <h1 class="text-center">Appartamenti</h1>
             <div class="left-searchbar ">
                 <input id="contacts-filter" class="left-searchbar-input" type="text"
-                placeholder="Cerca per città" @keyup.enter="searchApartment(searchCity,searchRegion)" name="searchCity" v-model="searchCity" >
-                
-                <input id="contacts-filter" class="left-searchbar-input" type="text"
-                placeholder="Cerca per regione" @keyup.enter="searchApartment(searchCity,searchRegion)" name="searchRegion" v-model="searchRegion" >
-                
-                
+                placeholder="Cerca per città o indirizzo" name="search" v-model="search" >
+
                 <h3>Cerca per servizi</h3>
                 <div>
                     <div v-for="facility in facilities" :key="facility.id" class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" :id="'facility-'+facility.id" v-model="searchFacilities" name="searchFacilities[]" :value="facility.id">
                         <label class="form-check-label" :for="'facility-'+ facility.id + ''">{{facility.name}}</label>
                     </div>
-                    <button @click="searchApartment(searchCity,searchRegion,searchFacilities)" class="btn btn-primary">Cerca</button>
+                    <button @click="searchApartment(search,searchFacilities)" class="btn btn-primary">Cerca</button>
                 </div>
             </div>
            
         <div class="row">
             <Apartment v-for="apartment in apartments " :key="apartment.id" :apartment="apartment"/>
         </div>
+        
+    
+        
+        
+        
         
     </section>
 </template>
@@ -36,8 +37,7 @@ import Apartment from './apartment';
             return {
                 apartments: [],
                 facilities:[],
-                searchCity: "",
-                searchRegion: "",
+                search:"",
                 searchFacilities: [],
 
             }
@@ -67,47 +67,45 @@ import Apartment from './apartment';
                })
            },
 
-            searchApartment(searchCity,searchRegion,searchFacilities){
+           compareAmenities(arr1, arr2) {
+                    let apartmentsAmenitiesId = [];
+                    arr1.forEach((object) => {
+                    apartmentsAmenitiesId.push(object.id)
+                    
+                    });
+                    const filteredArray = arr2.filter(value => apartmentsAmenitiesId.includes(value));
+                    if (filteredArray.length == arr2.length) {
+                        return true;
+                    }  else {
+                        return false
+                    }
+                },
+       
+
+            searchApartment(search,searchFacilities){
                 axios.get("http://127.0.0.1:8000/api/api/apartments", {
                     params: {
-                        query: searchCity,
-                        query: searchRegion,
+                        query: search,
                         array: searchFacilities,
                     }
                 })
                 .then( (response) => {
                     this.apartments = [];
-                    console.log(searchFacilities);
+                    // console.log(searchFacilities);
                     response.data.apartments.forEach(apartment => {
-                        if(apartment.city.toLowerCase().includes(searchCity.toLowerCase()) && 
-                        apartment.region.toLowerCase().includes(searchRegion.toLowerCase())
-                        // searchFacilities.filter(singleFacility => {
-                            // console.log(singleFacility)
-                            // apartment.facilities.filter(facility => facility.id.includes(singleFacility))
-                        // })
-                        
-                        // searchFacilities.forEach(singleFacility =>{
-                        //     // console.log(singleFacility);
-                        //     apartment.facilities.forEach(facility => {
-                        //         // console.log(facility);
-                        //        if(singleFacility.id == facility.id ){
-
-                        //        }
-                        //     })
-                        // })
-                        ){
-                            // console.log(searchCity);
-                            // console.log(searchRegion);
+                        if((apartment.city.toLowerCase().includes(search.toLowerCase()) || 
+                        apartment.address.toLowerCase().includes(search.toLowerCase())) &&
+                        this.compareAmenities(apartment.facilities,searchFacilities)){
+                            
                             if(!this.apartments.includes(apartment)){
                                 this.apartments.push(apartment);
                                 // console.log(this.apartments);
-                                this.searchCity = "";
-                                this.searchRegion = "";
+                                this.search = ""
                                 this.searchFacilities = [];
+                               
                             }
                     
-                        }
-                    
+                        } 
                     });
                 }).catch( (error) =>{
                     console.log(error);
