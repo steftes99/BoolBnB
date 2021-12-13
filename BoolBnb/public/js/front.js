@@ -1940,6 +1940,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apartment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apartment */ "./resources/js/components/Apartments/apartment.vue");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
 //
 //
 //
@@ -1961,7 +1967,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       apartments: [],
-      search: ""
+      searchCity: "",
+      searchRegion: ""
     };
   },
   components: {
@@ -1978,24 +1985,32 @@ __webpack_require__.r(__webpack_exports__);
         console.error(err);
       });
     },
-    searchApartment: function searchApartment(search) {
+    searchApartment: function searchApartment(searchCity, searchRegion) {
       var _this2 = this;
 
       axios.get("http://127.0.0.1:8000/api/api/apartments", {
-        params: {
-          query: search
-        }
+        params: _defineProperty({
+          query: searchCity
+        }, "query", searchRegion)
       }).then(function (response) {
         _this2.apartments = [];
         response.data.apartments.forEach(function (element) {
-          if (element.city.toLowerCase().includes(search.toLowerCase())) {
-            console.log(search);
+          if (element.city.toLowerCase().includes(searchCity.toLowerCase()) && element.region.toLowerCase().includes(searchRegion.toLowerCase())) {
+            console.log(searchCity);
+            console.log(searchRegion);
 
             if (!_this2.apartments.includes(element)) {
               _this2.apartments.push(element);
 
               console.log(_this2.apartments);
-              _this2.search = "";
+              _this2.searchCity = "";
+            }
+
+            if (!_this2.apartments.includes(element)) {
+              _this2.apartments.push(element);
+
+              console.log(_this2.apartments);
+              _this2.searchRegion = "";
             }
           }
         });
@@ -2004,7 +2019,31 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function () {
         _this2.loading = false;
       });
-    }
+    } // searchRegion(search){
+    //     axios.get("http://127.0.0.1:8000/api/api/apartments", {
+    //         params: {
+    //             query: search
+    //         }
+    //     })
+    //     .then( (response) => {
+    //         this.apartments = [];
+    //         response.data.apartments.forEach(element => {
+    //             if(element.region.toLowerCase().includes(search.toLowerCase())){
+    //                 console.log(search);
+    //                 if(!this.apartments.includes(element)){
+    //                     this.apartments.push(element);
+    //                     console.log(this.apartments);
+    //                     this.search = "";
+    //                 }
+    //             }
+    //         });
+    //     }).catch( (error) =>{
+    //         console.log(error);
+    //     }).then( () =>{
+    //         this.loading = false;
+    //     });
+    // }
+
   },
   mounted: function mounted() {
     this.getApartments();
@@ -38350,24 +38389,69 @@ var render = function () {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.search,
-            expression: "search",
+            value: _vm.searchCity,
+            expression: "searchCity",
           },
         ],
         staticClass: "left-searchbar-input",
         attrs: {
           id: "contacts-filter",
           type: "text",
-          placeholder: "Cerca la città",
-          name: "search",
+          placeholder: "Cerca per città",
+          name: "searchCity",
         },
-        domProps: { value: _vm.search },
+        domProps: { value: _vm.searchCity },
         on: {
+          keyup: function ($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.searchApartment(_vm.searchCity, _vm.searchRegion)
+          },
           input: function ($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.search = $event.target.value
+            _vm.searchCity = $event.target.value
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.searchRegion,
+            expression: "searchRegion",
+          },
+        ],
+        staticClass: "left-searchbar-input",
+        attrs: {
+          id: "contacts-filter",
+          type: "text",
+          placeholder: "Cerca per regione",
+          name: "searchRegion",
+        },
+        domProps: { value: _vm.searchRegion },
+        on: {
+          keyup: function ($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.searchApartment(_vm.searchCity, _vm.searchRegion)
+          },
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.searchRegion = $event.target.value
           },
         },
       }),
@@ -38378,7 +38462,7 @@ var render = function () {
           staticClass: "btn btn-primary",
           on: {
             click: function ($event) {
-              return _vm.searchApartment(_vm.search)
+              return _vm.searchApartment(_vm.searchCity, _vm.searchRegion)
             },
           },
         },

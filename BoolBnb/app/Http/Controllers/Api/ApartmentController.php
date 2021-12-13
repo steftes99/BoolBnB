@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\Facility;
 use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
@@ -15,9 +16,11 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        $apartments = Apartment::with('facilities')->get();
 
-        return response()->json(compact('apartments'));
+        $facilities = Facility::all();
+
+        return response()->json(compact('apartments','facilities'));
     }
 
     /**
