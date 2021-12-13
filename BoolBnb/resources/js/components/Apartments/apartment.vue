@@ -7,6 +7,7 @@
             
             <p class="card-text"> <strong>Città:</strong> {{ apartment.city }}</p>
             <p class="card-text"><strong>Regione:</strong>{{ apartment.region }}</p>
+            <span v-for="facility in apartment.facilities" :key="facility.id" class="card-text p-2">{{ facility.name }}</span>
             <a :href="'http://127.0.0.1:8000/guest/apartments/' + apartment.id" class="btn btn-primary">Maggiori informazioni</a>
         </div>
 
