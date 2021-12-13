@@ -14629,3 +14629,9 @@ h3 {
   background-image: url("../assets/img/Colosseo.jpg");
   background-size: cover;
 }
+
+#maps {
+  position: relative;
+  width: 500px;
+  height: 200px;
+}
