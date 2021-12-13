@@ -14629,3 +14629,9 @@ h3 {
   background-image: url("../assets/img/Colosseo.jpg");
   background-size: cover;
 }
+.bg_img h3 {
+  color: white;
+}
+.bg_img h1 {
+  color: white;
+}
