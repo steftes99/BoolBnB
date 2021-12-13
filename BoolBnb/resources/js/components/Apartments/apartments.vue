@@ -104,8 +104,17 @@ import Apartment from './apartment';
                                 // console.log(this.apartments);
                                 this.search = ""
                                 this.searchFacilities = [];
-                               
+                                
                             }
+
+                        console.log(this.apartments)
+
+                        this.apartments.forEach((element) =>{
+                            var marker ;
+                            marker = new tt.Marker()
+                            .setLngLat([element.long, element.lat])
+                            .addTo(this.map);
+                        })
                     
                         } 
                     });
@@ -119,20 +128,33 @@ import Apartment from './apartment';
         },
 
 
+
         mounted(){
+
             this.getApartments();
             this.getFacilities();
+            
+
 
             this.map = tt.map({
                 key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
                 container:'map',
-                center: [12.564874, 41.00000],
-                zoom: 5,
-                basePath: "/sdk"
-    });
-        this.map.addControl(new tt.FullscreenControl());
-        this.map.addControl(new tt.NavigationControl());
-        }
+                center: [12.564874, 42.000000 ],
+                zoom: 2,
+            });
+            this.map.addControl(new tt.FullscreenControl());
+            this.map.addControl(new tt.NavigationControl());
+
+            this.apartments.forEach((element) =>{
+               
+            
+            })
+                
+
+        
+        
+        },
+        
     }
 
 </script>
