@@ -7,7 +7,7 @@
                 <h3>BoolBnB</h3>
                 <h1>Prenota il tuo appartamento</h1>
                 <div class="input-group">
-                    <button type="button" class="btn btn-primary btn-lg btn-block mx-1">I nostri appartamenti</button>
+                    <a type="button" href="{{route('guest.apartments.index')}}" class="btn btn-primary btn-lg btn-block mx-1">I nostri appartamenti</a>
                 </div>
             </div>
             

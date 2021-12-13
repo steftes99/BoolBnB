@@ -8,9 +8,6 @@
         <div class="collapse navbar-collapse my_navbar" id="navbarSupportedContent">
             
            <ul class="navbar-nav ml-auto">
-            <li>
-                <a class="btn btn-primary mx-2" href="{{route('guest.apartments.index')}}">Tutti gli appartamenti</a>
-            </li>
             @guest
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
