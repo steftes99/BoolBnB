@@ -27,6 +27,13 @@ Route::namespace("Guest")
         Route::resource('apartments', ApartmentController::class)->only(['index', 'show']);
 });
 
+Route::namespace("Message")
+    ->prefix('message') 
+    ->name('message.') 
+    ->group(function(){ 
+        Route::resource('/', MessageController::class);
+});
+
 Route::middleware('auth')  // devi essere autenticato
     ->namespace("Admin") // prendi i controller delle route tue figlie a partire dalla cartella Admin/
     ->prefix('admin') // inserisci come prefisso nelle URI di tutte le route figlie admin/
