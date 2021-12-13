@@ -86,8 +86,8 @@
     </main>
     <div id="app">
     </div>
-    <footer>
-        <footer class="position-relative z-index-10 d-print-none">
+   
+        <footer class="position-fixed fixed-bottom z-index-10 d-print-none">
             <div class="py-6 bg-light text-muted">
                 <div class="container">
                     <div class="row">
@@ -194,7 +194,6 @@
             </div>
             
         </footer>
-    </footer>
     @yield('scripts')
 </body>
 </html>
