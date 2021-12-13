@@ -7,9 +7,18 @@
                 
                 <input id="contacts-filter" class="left-searchbar-input" type="text"
                 placeholder="Cerca per regione" @keyup.enter="searchApartment(searchCity,searchRegion)" name="searchRegion" v-model="searchRegion" >
-                <button @click="searchApartment(searchCity,searchRegion)" class="btn btn-primary">Cerca</button>
                 
+                
+                <h3>Cerca per servizi</h3>
+                <div>
+                    <div v-for="facility in facilities" :key="facility.id" class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" :id="'facility-'+facility.id" v-model="searchFacilities" name="searchFacilities[]" :value="facility.id">
+                        <label class="form-check-label" :for="'facility-'+ facility.id + ''">{{facility.name}}</label>
+                    </div>
+                    <button @click="searchApartment(searchCity,searchRegion,searchFacilities)" class="btn btn-primary">Cerca</button>
+                </div>
             </div>
+           
         <div class="row">
             <Apartment v-for="apartment in apartments " :key="apartment.id" :apartment="apartment"/>
         </div>
@@ -26,8 +35,10 @@ import Apartment from './apartment';
         data() {
             return {
                 apartments: [],
+                facilities:[],
                 searchCity: "",
                 searchRegion: "",
+                searchFacilities: [],
 
             }
         },
@@ -38,37 +49,63 @@ import Apartment from './apartment';
            getApartments(){
                axios.get('http://127.0.0.1:8000/api/api/apartments')
                .then((res) => {
-                   console.log(res.data.apartments)
+                //    console.log(res.data.apartments)
                    this.apartments = res.data.apartments;
                })
                .catch((err)=>{
                    console.error(err);
                })
            },
+           getFacilities(){
+               axios.get('http://127.0.0.1:8000/api/api/apartments')
+               .then((res) => {
+                //    console.log(res.data.facilities)
+                   this.facilities = res.data.facilities;
+               })
+               .catch((err)=>{
+                   console.error(err);
+               })
+           },
 
-            searchApartment(searchCity,searchRegion){
+            searchApartment(searchCity,searchRegion,searchFacilities){
                 axios.get("http://127.0.0.1:8000/api/api/apartments", {
                     params: {
                         query: searchCity,
                         query: searchRegion,
+                        array: searchFacilities,
                     }
                 })
                 .then( (response) => {
                     this.apartments = [];
-                    response.data.apartments.forEach(element => {
-                        if(element.city.toLowerCase().includes(searchCity.toLowerCase()) && element.region.toLowerCase().includes(searchRegion.toLowerCase())){
-                            console.log(searchCity);
-                            console.log(searchRegion);
-                            if(!this.apartments.includes(element)){
-                                this.apartments.push(element);
-                                console.log(this.apartments);
+                    console.log(searchFacilities);
+                    response.data.apartments.forEach(apartment => {
+                        if(apartment.city.toLowerCase().includes(searchCity.toLowerCase()) && 
+                        apartment.region.toLowerCase().includes(searchRegion.toLowerCase())
+                        // searchFacilities.filter(singleFacility => {
+                            // console.log(singleFacility)
+                            // apartment.facilities.filter(facility => facility.id.includes(singleFacility))
+                        // })
+                        
+                        // searchFacilities.forEach(singleFacility =>{
+                        //     // console.log(singleFacility);
+                        //     apartment.facilities.forEach(facility => {
+                        //         // console.log(facility);
+                        //        if(singleFacility.id == facility.id ){
+
+                        //        }
+                        //     })
+                        // })
+                        ){
+                            // console.log(searchCity);
+                            // console.log(searchRegion);
+                            if(!this.apartments.includes(apartment)){
+                                this.apartments.push(apartment);
+                                // console.log(this.apartments);
                                 this.searchCity = "";
-                            }
-                            if(!this.apartments.includes(element)){
-                                this.apartments.push(element);
-                                console.log(this.apartments);
                                 this.searchRegion = "";
+                                this.searchFacilities = [];
                             }
+                    
                         }
                     
                     });
@@ -78,35 +115,13 @@ import Apartment from './apartment';
                     this.loading = false;
                 });
             },
-            // searchRegion(search){
-            //     axios.get("http://127.0.0.1:8000/api/api/apartments", {
-            //         params: {
-            //             query: search
-            //         }
-            //     })
-            //     .then( (response) => {
-            //         this.apartments = [];
-            //         response.data.apartments.forEach(element => {
-            //             if(element.region.toLowerCase().includes(search.toLowerCase())){
-            //                 console.log(search);
-            //                 if(!this.apartments.includes(element)){
-            //                     this.apartments.push(element);
-            //                     console.log(this.apartments);
-            //                     this.search = "";
-            //                 }
-            //             }
-            //         });
-            //     }).catch( (error) =>{
-            //         console.log(error);
-            //     }).then( () =>{
-            //         this.loading = false;
-            //     });
-            // }
+            
         },
 
 
         mounted(){
             this.getApartments();
+            this.getFacilities();
         }
     }
 
