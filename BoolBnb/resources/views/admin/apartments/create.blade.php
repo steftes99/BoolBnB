@@ -12,7 +12,7 @@
                     </ul>
                 </div>
             @endif
-        <form action="{{route('admin.apartments.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('admin.apartments.store')}}" method="POST" enctype="multipart/form-data" id="create-form">
             @csrf
             <div class="form-group">
                 <label for="title">Titolo</label>
@@ -67,10 +67,18 @@
 
             <div class="pt-3 text-center"> 
                 <button type="reset" class="btn btn-primary">Resetta</button>
-                <button type="submit" class="btn btn-primary">Crea</button>
+                <button type="submit" id="button-create" class="btn btn-primary">Crea</button>
             </div>
             
             
           </form>
     </div>
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+
+
+
+</script>
 @endsection

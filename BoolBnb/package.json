@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
+        "@tomtom-international/web-sdk-maps": "^6.15.0",
         "font-awesome": "^4.7.0"
     }
 }

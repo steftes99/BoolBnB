@@ -51,7 +51,7 @@ let map = tt.map({
       {{$apartment->long}},
       {{$apartment->lat}}  
     ],
-    zoom: 15
+    zoom: 16
 });
 let marker = new tt.Marker()
 .setLngLat([
@@ -59,7 +59,11 @@ let marker = new tt.Marker()
   {{$apartment->lat}}
 ])
 .addTo(map);
-marker.setPopup(new tt.Popup().setHTML('{{$apartment->title}}'));
+marker.setPopup(new tt.Popup()
+.setHTML(`
+<h5>{{$apartment->title}}</h5>
+<p>{{$apartment->address}}</p>`
+));
 
 
 </script>

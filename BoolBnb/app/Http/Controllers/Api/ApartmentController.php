@@ -72,9 +72,13 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Apartment $apartment)
     {
-        //
+        $data = $request->all();
+        $apartment->fill($data);
+        $apartment->update();
+
+        return $apartment;
     }
 
     /**
