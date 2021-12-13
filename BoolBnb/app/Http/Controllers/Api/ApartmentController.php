@@ -77,11 +77,7 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        $data = $request->all();
-        $apartment->fill($data);
-        $apartment->update();
-
-        return $apartment;
+        
     }
 
     /**

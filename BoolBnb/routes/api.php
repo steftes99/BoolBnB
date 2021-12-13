@@ -22,5 +22,6 @@ Route::namespace('Api')
 ->name('api.')
 ->prefix('api')
 ->group(function(){
-    Route::resource('apartments', ApartmentController::class)->only(['index', 'show','update']);
+    Route::resource('apartments', ApartmentController::class)->only(['index', 'show',]);
 });
+

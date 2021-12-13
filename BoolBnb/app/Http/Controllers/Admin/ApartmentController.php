@@ -107,12 +107,19 @@ class ApartmentController extends Controller
             "square.integer" => 'Puoi inserire solo numeri nel campo metri quadri'
         ]);
 
-
+        
         $data = $request->all();
 
         $data['user_id'] = Auth::user()->id;
 
         $data['image'] = Storage::put('apartments/images', $data['image']);
+        $address = str_replace(' ','-',$data['address']);
+        $call = file_get_contents('https://api.tomtom.com/search/2/geocode/'.$data['region'].'-'.$data['city'].'-'.$address.'.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ');
+        
+        $response = json_decode($call);
+
+        $data['lat'] = $response->results[0]->position->lat;
+        $data['long'] = $response->results[0]->position->lon;
 
         $apartment = new Apartment();
 

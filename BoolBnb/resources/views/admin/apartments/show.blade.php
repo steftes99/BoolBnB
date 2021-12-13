@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@csrf
     <div class="container">
         <div class="card mb-3">
             <div class="row no-gutters">
@@ -50,18 +51,18 @@
 @section('scripts')
 <script type="text/javascript">
 
-
+/* 
 const address = "{{$apartment->address}}"
 const region = "{{$apartment->region}}"
 const city = "{{$apartment->city}}"
 
     console.log(address +':'+ city +':'+ region);
     let searchMap = [];
-
-    axios.get(`https://api.tomtom.com/search/2/geocode/${region}-${city}-${address}.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ`)
+ */
+/*     axios.get(`https://api.tomtom.com/search/2/geocode/${region}-${city}-${address}.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ`)
     .then(function (response) {
         console.log(response);
-        searchMap = response.data.results;
+        searchMap = response.data.results[0].position;
         console.log(searchMap);
 
     })
@@ -69,37 +70,48 @@ const city = "{{$apartment->city}}"
         // handle error
         console.log(error);
     });
+ */
 
-    axios.patch(`https://127.0.0.1:8000/api/api/apartments/{{$apartment->id}}`,{
-      lat:searchMap[0].position.lat;
-      long:searchMap[0].position.lon;
+/*     axios({
+      method: 'patch',
+      url: `https://127.0.0.1:8000/api/api/apartments/{{$apartment->id}}`,
+      data: {
+        lat: searchMap.lat,
+        long: searchMap.lon
+      }
     })
     .then(function( response ){
-        // Handle success
-    }.bind(this));
+        console.log(response);
+    })
+ */
+let lat = {{$apartment->lat}}
+let lon = {{$apartment->long}}
 
+if(( lat != 0) || ( lon != 0)){
+  let map = tt.map({
+      key: 'CskONgb89uswo1PwlNDOtG4txMKrp1yQ',
+      container: 'map',
+      center: [
+        {{$apartment->long}},
+        {{$apartment->lat}}  
+      ],
+      zoom: 16
+  });
+  let marker = new tt.Marker()
+  .setLngLat([
+    {{$apartment->long}},
+    {{$apartment->lat}}
+  ])
+  .addTo(map);
+  marker.setPopup(new tt.Popup()
+  .setHTML(`
+  <h5>{{$apartment->title}}</h5>
+  <p>{{$apartment->address}}</p>`
+  ));
+}else{
 
+}
 
-let map = tt.map({
-    key: 'CskONgb89uswo1PwlNDOtG4txMKrp1yQ',
-    container: 'map',
-    center: [
-      {{$apartment->long}},
-      {{$apartment->lat}}  
-    ],
-    zoom: 16
-});
-let marker = new tt.Marker()
-.setLngLat([
-  {{$apartment->long}},
-  {{$apartment->lat}}
-])
-.addTo(map);
-marker.setPopup(new tt.Popup()
-.setHTML(`
-<h5>{{$apartment->title}}</h5>
-<p>{{$apartment->address}}</p>`
-));
 
 
 </script>
