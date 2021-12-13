@@ -1,30 +1,29 @@
 <template>
-    <section id="apartment-list">
-        <h1 class="text-center">Appartamenti</h1>
-            <div class="left-searchbar ">
-                <input id="contacts-filter" class="left-searchbar-input" type="text"
-                placeholder="Cerca per città o indirizzo" name="search" v-model="search" >
+    <div class="container">
+        <div id="map" class="map"></div>
 
-                <h3>Cerca per servizi</h3>
-                <div>
-                    <div v-for="facility in facilities" :key="facility.id" class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" :id="'facility-'+facility.id" v-model="searchFacilities" name="searchFacilities[]" :value="facility.id">
-                        <label class="form-check-label" :for="'facility-'+ facility.id + ''">{{facility.name}}</label>
+        <section id="apartment-list">
+            <h1 class="text-center">Appartamenti</h1>
+                <div class="left-searchbar ">
+                    <input id="contacts-filter" class="left-searchbar-input" type="text"
+                    placeholder="Cerca per città o indirizzo" name="search" v-model="search" >
+
+                    <h3>Cerca per servizi</h3>
+                    <div>
+                        <div v-for="facility in facilities" :key="facility.id" class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" :id="'facility-'+facility.id" v-model="searchFacilities" name="searchFacilities[]" :value="facility.id">
+                            <label class="form-check-label" :for="'facility-'+ facility.id + ''">{{facility.name}}</label>
+                        </div>
+                        <button @click="searchApartment(search,searchFacilities)" class="btn btn-primary">Cerca</button>
                     </div>
-                    <button @click="searchApartment(search,searchFacilities)" class="btn btn-primary">Cerca</button>
                 </div>
-            </div>
-           
-        <div class="row">
-            <Apartment v-for="apartment in apartments " :key="apartment.id" :apartment="apartment"/>
-        </div>
-        
+                <div class="row">
+                    <Apartment v-for="apartment in apartments " :key="apartment.id" :apartment="apartment"/>
+                </div>
+            
     
-        
-        
-        
-        
-    </section>
+        </section>
+    </div>
 </template>
 
 <script>
@@ -39,12 +38,14 @@ import Apartment from './apartment';
                 facilities:[],
                 search:"",
                 searchFacilities: [],
+                map:{},
 
             }
         },
         components : {
             Apartment,
         },
+
         methods: {
            getApartments(){
                axios.get('http://127.0.0.1:8000/api/api/apartments')
@@ -56,6 +57,7 @@ import Apartment from './apartment';
                    console.error(err);
                })
            },
+
            getFacilities(){
                axios.get('http://127.0.0.1:8000/api/api/apartments')
                .then((res) => {
@@ -120,6 +122,16 @@ import Apartment from './apartment';
         mounted(){
             this.getApartments();
             this.getFacilities();
+
+            this.map = tt.map({
+                key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
+                container:'map',
+                center: [12.564874, 41.00000],
+                zoom: 5,
+                basePath: "/sdk"
+    });
+        this.map.addControl(new tt.FullscreenControl());
+        this.map.addControl(new tt.NavigationControl());
         }
     }
 
@@ -128,5 +140,9 @@ import Apartment from './apartment';
 <style scoped>
     .notVisible {
         display: none;
+    }
+    .map{
+        width: 400px;
+        height: 400px;
     }
 </style>
