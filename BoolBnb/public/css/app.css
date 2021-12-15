@@ -14631,7 +14631,7 @@ body {
 }
 
 .bg_img {
-  height: 80vh;
+  height: 100vh;
   background-image: url("../assets/img/Colosseo.jpg");
   background-size: cover;
 }
@@ -14696,7 +14696,7 @@ p {
 }
 
 ._icons i {
-  color: #844d36;
+  color: white;
 }
 
 ._my-list li a {

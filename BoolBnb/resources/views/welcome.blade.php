@@ -8,7 +8,7 @@
                 <h1>Prenota il tuo appartamento</h1>
                 <div class="input-group">
                    
-                    <a type="button" href="{{ route('guest.apartments.index') }}" class="btn btn-dark btn-lg btn-block mx-1">I nostri appartamenti</a>
+                    <a type="button" href="{{ route('guest.apartments.index') }}" class="btn btn-dark btn-lg btn-block mx-1">Cerca il tuo appartamento</a>
                 </div>
             </div>
             

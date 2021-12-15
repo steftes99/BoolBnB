@@ -1,5 +1,5 @@
 <footer class="position-relative fixed-bottom mt-auto">
-    <div class="py-5 text-muted _my-bg">
+    {{-- <div class="py-5 text-muted _my-bg">
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-lg-10">
@@ -9,38 +9,7 @@
                         </h6>
                     </div>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-                    <ul class="list-inline _icons">
-                        <li class="list-inline-item">
-                            <a href="#" class="text-muted text-primary-hover">
-                                <i class="fab fa-twitter">
-                                </i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" class="text-muted text-primary-hover">
-                                <i class="fab fa-facebook">
-                                </i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" class="text-muted text-primary-hover">
-                                <i class="fab fa-instagram">
-                                </i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" class="text-muted text-primary-hover">
-                                <i class="fab fa-pinterest">
-                                </i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" class="text-muted text-primary-hover">
-                                <i class="fab fa-vimeo">
-                                </i>
-                            </a>
-                        </li>
-                    </ul>
+                    
                 </div>
                 <div class="col-lg-2 col-md-6 mb-5 mb-lg-10">
                     <h6 class="text-uppercase mb-3">
@@ -88,7 +57,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="py-4 fw-light _bg-color text-gray-300">
         <div class="container">
             <div class="row align-items-center">
@@ -97,8 +66,39 @@
                         © 2021, BoolBnB. All rights reserved.
                     </p>
                 </div>
-                <div class="col-md-6">
-                    
+                <div class="col-md-6 text-center d-flex justify-content-center align-items-center">
+                    <ul class="list-inline mb-0 _icons">
+                        <li class="list-inline-item">
+                            <a href="#" class="text-muted text-primary-hover">
+                                <i class="fab fa-twitter">
+                                </i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-muted text-primary-hover">
+                                <i class="fab fa-facebook">
+                                </i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-muted text-primary-hover">
+                                <i class="fab fa-instagram">
+                                </i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-muted text-primary-hover">
+                                <i class="fab fa-pinterest">
+                                </i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-muted text-primary-hover">
+                                <i class="fab fa-vimeo">
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
