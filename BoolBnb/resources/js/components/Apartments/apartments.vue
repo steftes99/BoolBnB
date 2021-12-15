@@ -14,11 +14,11 @@
                             <input class="form-check-input" type="checkbox" :id="'facility-'+facility.id" v-model="searchFacilities" name="searchFacilities[]" :value="facility.id">
                             <label class="form-check-label" :for="'facility-'+ facility.id + ''">{{facility.name}}</label>
                         </div>
-                        <button @click="searchApartment(search,searchFacilities)" class="btn btn-primary">Cerca</button>
+                        <button @click="searchApartment(search,searchFacilities); " class="btn btn-primary">Cerca</button>
                     </div>
                 </div>
                 <div class="row">
-                    <Apartment v-for="apartment in apartments " :key="apartment.id" :apartment="apartment"/>
+                    <Apartment v-for="apartment in searchedApartment " :key="apartment.id" :apartment="apartment"/>
                 </div>
             
     
@@ -39,6 +39,10 @@ import Apartment from './apartment';
                 search:"",
                 searchFacilities: [],
                 map:{},
+                searchedApartment:[],
+                nearestApartments:[],
+                my_lat:42.564525,
+                my_long:12.03356,
 
             }
         },
@@ -69,20 +73,62 @@ import Apartment from './apartment';
                })
            },
 
-           compareAmenities(arr1, arr2) {
-                    let apartmentsAmenitiesId = [];
-                    arr1.forEach((object) => {
-                    apartmentsAmenitiesId.push(object.id)
+           compareFacilities(arr1, arr2) {
+                    let apartmentsFacilitiesId = [];
+                    arr1.forEach((facility) => {
+                    apartmentsFacilitiesId.push(facility.id)
                     
                     });
-                    const filteredArray = arr2.filter(value => apartmentsAmenitiesId.includes(value));
+                    const filteredArray = arr2.filter(value => apartmentsFacilitiesId.includes(value));
                     if (filteredArray.length == arr2.length) {
                         return true;
                     }  else {
                         return false
                     }
                 },
-       
+
+
+            
+
+            deg2rad(deg) {
+                return deg * (Math.PI/180)
+                },
+
+
+            getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+                var R = 6371; // Radius of the earth in km
+                var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
+                var dLon = this.deg2rad(lon2-lon1); 
+                var a = 
+                    Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
+                    Math.sin(dLon/2) * Math.sin(dLon/2)
+                    ; 
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                var d = R * c; // Distance in km
+                return d;
+                },
+
+                newMarker(){
+                console.log('new marker in console')
+                this.searchedApartment.forEach((element) =>{
+
+                    if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20){
+                        
+                        var marker ;
+                        marker = new tt.Marker()
+
+                    .setLngLat([element.long, element.lat])
+                    .addTo(this.map);
+                    }
+                    
+                    
+                    })
+
+                
+
+            },
+
 
             searchApartment(search,searchFacilities){
                 axios.get("http://127.0.0.1:8000/api/api/apartments", {
@@ -93,30 +139,41 @@ import Apartment from './apartment';
                 })
                 .then( (response) => {
                     this.apartments = [];
-                    // console.log(searchFacilities);
+                    this.searchedApartment=[];
                     response.data.apartments.forEach(apartment => {
                         if((apartment.city.toLowerCase().includes(search.toLowerCase()) || 
                         apartment.address.toLowerCase().includes(search.toLowerCase())) &&
-                        this.compareAmenities(apartment.facilities,searchFacilities)){
+                        this.compareFacilities(apartment.facilities,searchFacilities)){
                             
-                            if(!this.apartments.includes(apartment)){
-                                this.apartments.push(apartment);
-                                // console.log(this.apartments);
+                            if(!this.searchedApartment.includes(apartment)){
+                                this.searchedApartment.push(apartment);
                                 this.search = ""
                                 this.searchFacilities = [];
-                                
+
                             }
 
-                        console.log(this.apartments)
+                            this.my_lat='';
+                            this.my_long='';
+                            this.my_long = this.searchedApartment[0].long;
+                            this.my_lat = this.searchedApartment[0].lat;
+                            
 
-                        this.apartments.forEach((element) =>{
-                            var marker ;
-                            marker = new tt.Marker()
-                            .setLngLat([element.long, element.lat])
-                            .addTo(this.map);
-                        })
-                    
-                        } 
+                            
+                            this.map = tt.map({
+                                key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
+                                container:'map',
+                                center: [this.my_long, this.my_lat ],
+                                zoom: 12,
+                            });
+                            this.map.addControl(new tt.FullscreenControl());
+                            this.map.addControl(new tt.NavigationControl());
+
+                            
+                            this.newMarker()
+
+                            console.log(this.apartments)
+
+                        }
                     });
                 }).catch( (error) =>{
                     console.log(error);
@@ -124,6 +181,8 @@ import Apartment from './apartment';
                     this.loading = false;
                 });
             },
+
+            
             
         },
 
@@ -139,16 +198,11 @@ import Apartment from './apartment';
             this.map = tt.map({
                 key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
                 container:'map',
-                center: [12.564874, 42.000000 ],
+                center: [this.my_long, this.my_lat ],
                 zoom: 2,
             });
             this.map.addControl(new tt.FullscreenControl());
             this.map.addControl(new tt.NavigationControl());
-
-            this.apartments.forEach((element) =>{
-               
-            
-            })
                 
 
         
