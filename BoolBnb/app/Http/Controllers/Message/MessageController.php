@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
+  
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +19,10 @@ class MessageController extends Controller
     public function index()
     {
         $messages = Message::all();
-        return view('message.index', compact('messages'));
+        // Apartment::where('user_id', Auth::user()->id);
+        $apartments = Apartment::where('user_id', Auth::user()->id)->get();
+        // dd($apartments);
+        return view('message.index', compact('messages','apartments'));
     }
 
     /**
