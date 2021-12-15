@@ -5,17 +5,18 @@
         <section id="apartment-list">
             <h1 class="text-center">Appartamenti</h1>
                 <div class="left-searchbar ">
-                    <input id="contacts-filter" class="left-searchbar-input" type="text"
+                    <input id="contacts-filter" class="form-control" type="text"
                     placeholder="Cerca per città o indirizzo" name="search" v-model="search" >
 
                     <h3>Cerca per servizi</h3>
-                    <div>
-                        <div v-for="facility in facilities" :key="facility.id" class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" :id="'facility-'+facility.id" v-model="searchFacilities" name="searchFacilities[]" :value="facility.id">
-                            <label class="form-check-label" :for="'facility-'+ facility.id + ''">{{facility.name}}</label>
+                    <div class="d-flex justify-content-center flex-wrap">
+                        <div v-for="facility in facilities" :key="facility.id" class="custom-control-inline custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" :id="'facility-'+facility.id" v-model="searchFacilities" name="searchFacilities[]" :value="facility.id">
+                            <label class="custom-control-label" :for="'facility-'+ facility.id + ''">{{facility.name}}</label>
                         </div>
-                        <button @click="searchApartment(search,searchFacilities); " class="btn btn-primary">Cerca</button>
+                        
                     </div>
+                    <button @click="searchApartment(search,searchFacilities); " class="btn btn-primary">Cerca</button>
                 </div>
                 <div class="row">
                     <Apartment v-for="apartment in searchedApartment " :key="apartment.id" :apartment="apartment"/>
@@ -218,7 +219,11 @@ import Apartment from './apartment';
         display: none;
     }
     .map{
-        width: 400px;
-        height: 400px;
+        width: 100%;
+        height: 40vh;
     }
+</style>
+
+<style lang="scss">
+    @import '../../../sass/_index.scss'
 </style>

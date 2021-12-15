@@ -14680,7 +14680,7 @@ h3 {
 }
 ._btn-color:hover {
   background-color: #844d36;
-  border-color: #474853;
+  border-color: #844d36;
 }
 
 ._my-bg {
@@ -14709,4 +14709,14 @@ p {
 
 ._footer-sub {
   color: white;
+}
+
+.left-searchbar h3 {
+  color: black;
+}
+.left-searchbar .custom-control-input {
+  position: relative;
+}
+.left-searchbar ._search-btn {
+  display: block;
 }
