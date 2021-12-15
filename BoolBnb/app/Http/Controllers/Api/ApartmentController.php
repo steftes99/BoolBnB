@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Facility;
+use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
@@ -20,7 +21,9 @@ class ApartmentController extends Controller
 
         $facilities = Facility::all();
 
-        return response()->json(compact('apartments','facilities'));
+        $sponsorships = Sponsorship::all();
+
+        return response()->json(compact('apartments','facilities','sponsorships'),200);
     }
 
     /**
