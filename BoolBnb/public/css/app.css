@@ -14624,12 +14624,18 @@ h3 {
     border-color: #dee2e6;
   }
 }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .bg_img {
   height: 80vh;
   background-image: url("../assets/img/Colosseo.jpg");
   background-size: cover;
 }
-.bg_img h3 {
+.bg_img h2 {
   color: white;
 }
 .bg_img h1 {
@@ -14640,4 +14646,67 @@ h3 {
   position: relative;
   width: 500px;
   height: 200px;
+}
+
+.home-wrapper {
+  background-color: #8e8268;
+}
+
+.jumbo {
+  background-color: #474853;
+  background-size: auto;
+  height: 30vh;
+}
+.jumbo h1 {
+  color: #86b3d1;
+}
+
+h3 {
+  color: #86b3d1;
+}
+
+._img-container {
+  width: 50%;
+  height: 70%;
+}
+._img-container i {
+  color: #86b3d1;
+}
+
+._btn-color {
+  background-color: #86b3d1;
+  border-color: #86b3d1;
+  color: #474853;
+}
+._btn-color:hover {
+  background-color: #844d36;
+  border-color: #474853;
+}
+
+._my-bg {
+  background-color: #86b3d1;
+}
+
+h6 {
+  color: #474853;
+}
+
+p {
+  color: #844d36;
+}
+
+._icons i {
+  color: #844d36;
+}
+
+._my-list li a {
+  color: #844d36;
+}
+
+._bg-color {
+  background-color: #474853;
+}
+
+._footer-sub {
+  color: white;
 }

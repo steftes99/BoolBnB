@@ -1,8 +1,16 @@
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
 .bg_img{
     height: 80vh;
     background-image: url('../assets/img/Colosseo.jpg');
     background-size: cover;
-        h3{
+        h2{
             color: white;
         }
         h1{
