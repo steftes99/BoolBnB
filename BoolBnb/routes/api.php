@@ -25,3 +25,5 @@ Route::namespace('Api')
     Route::resource('apartments', ApartmentController::class)->only(['index', 'show',]);
 });
 
+Route::get('orders', 'Api\Orders\OrderController@generate');
+Route::post('make/payment', 'Api\Orders\OrderController@makePayment');
