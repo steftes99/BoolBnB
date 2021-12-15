@@ -2,14 +2,13 @@
 
 @section('content')
     <main>
-        <div class="jumbotron bg_img d-flex align-items-center justify-content-center">
-            <div class="container d-flex flex-column justify-content-center">
-                <h3>BoolBnB</h3>
+        <div class=" bg_img d-flex align-items-center justify-content-center">
+            <div class="container d-flex flex-column justify-content-center align-items-center">
+                <h2>BoolBnB</h2>
                 <h1>Prenota il tuo appartamento</h1>
                 <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                    aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-primary mx-1">search</button>
+                   
+                    <a type="button" href="{{ route('guest.apartments.index') }}" class="btn btn-dark btn-lg btn-block mx-1">I nostri appartamenti</a>
                 </div>
             </div>
             
