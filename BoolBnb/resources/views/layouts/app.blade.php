@@ -12,6 +12,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <script src="https://static.opentok.com/v2/js/opentok.js"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -24,6 +26,8 @@
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps-web.min.js"></script>
     {{-- axios --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="https://js.braintreegateway.com/web/dropin/1.32.1/js/dropin.min.js"></script>
 
 </head>
 <body>
@@ -84,8 +88,7 @@
     <main>
         @yield('content')
     </main>
-    <div id="app">
-    </div>
+    <div id="app"></div>
    
         <footer class="position-fixed fixed-bottom z-index-10 d-print-none">
             <div class="py-6 bg-light text-muted">

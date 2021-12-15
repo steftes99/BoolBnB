@@ -40,6 +40,12 @@
                     </form>
                 </div>
               </div>
+              <div class="col-12 p-5">
+                <div id="dropin-container"></div>
+                <div class="col-12 text-center">
+                  <button id="submit-button" class="btn btn-primary">Richiesta metodo di pagamento</button>
+                </div>              
+              </div>
               <div class="col-12 col-md-8" id="maps">
                 <div id="map" style="width: 100%; height: 100%;"></div>
               </div>
@@ -51,39 +57,48 @@
 @section('scripts')
 <script type="text/javascript">
 
-/* 
-const address = "{{$apartment->address}}"
-const region = "{{$apartment->region}}"
-const city = "{{$apartment->city}}"
+var button = document.querySelector('#submit-button');
 
-    console.log(address +':'+ city +':'+ region);
-    let searchMap = [];
- */
-/*     axios.get(`https://api.tomtom.com/search/2/geocode/${region}-${city}-${address}.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ`)
-    .then(function (response) {
-        console.log(response);
-        searchMap = response.data.results[0].position;
-        console.log(searchMap);
-
-    })
-    .catch(function (error){
-        // handle error
-        console.log(error);
+    braintree.dropin.create({
+      authorization: 'sandbox_kt5jprdn_ptngw3wjz8jfcmh5',
+      container: '#dropin-container',
+      vaultManager: true,
+      card: {
+        cardholderName: {
+          required: true
+        },
+        overrides: {
+          fields: {
+            number: {
+              placeholder: 'Numero Carta',
+              formatInput: false // Turn off automatic formatting
+            },
+            cardholderName:{
+              placeholder: 'Nome proprietario carta',
+            }
+          }
+        }
+      },
+/*       paypal: {
+        flow: 'checkout',
+        buttonStyle: {
+          color: 'blue',
+          shape: 'rect',
+          size: 'medium'
+        }
+      }, */
+      
+    }, function (createErr, instance) {
+      button.addEventListener('click', function () {
+        instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+          // Submit payload.nonce to your server
+          console.log(payload);
+          console.log(requestPaymentMethodErr);
+        });
+      });
     });
- */
 
-/*     axios({
-      method: 'patch',
-      url: `https://127.0.0.1:8000/api/api/apartments/{{$apartment->id}}`,
-      data: {
-        lat: searchMap.lat,
-        long: searchMap.lon
-      }
-    })
-    .then(function( response ){
-        console.log(response);
-    })
- */
+
 let lat = {{$apartment->lat}}
 let lon = {{$apartment->long}}
 
@@ -108,8 +123,6 @@ if(( lat != 0) || ( lon != 0)){
   <h5>{{$apartment->title}}</h5>
   <p>{{$apartment->address}}</p>`
   ));
-}else{
-
 }
 
 
