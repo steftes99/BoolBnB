@@ -14632,6 +14632,21 @@ h3 {
   color: #e7717d;
   font-size: 1.7rem;
 }
+._logo:hover {
+  text-decoration: none;
+  color: #e7717d;
+}
+
+._btn-color-2 {
+  background-color: #e7717d;
+  border-color: #e7717d;
+}
+
+._border-pink {
+  border: 1px solid #e7717d;
+  border-radius: 5%;
+  color: white;
+}
 
 body {
   min-height: 100vh;
