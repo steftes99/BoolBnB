@@ -27,8 +27,6 @@
     {{-- axios --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <script src="https://js.braintreegateway.com/web/dropin/1.32.1/js/dropin.min.js"></script>
-
 </head>
 <body>
     @include('partials.header')

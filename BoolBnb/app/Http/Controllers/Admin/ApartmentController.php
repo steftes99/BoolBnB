@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Facility;
+use App\Models\Sponsorship;
+use Braintree\Gateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -138,9 +140,11 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show(Apartment $apartment, Gateway $gateway)
     {
         $facilities = Facility::all();
+
+        $sponsorships = Sponsorship::all();
 
         $imagePrefix = '';
         if(!str_starts_with($apartment->image ,'http')){
@@ -149,7 +153,7 @@ class ApartmentController extends Controller
             $imagePrefix = $apartment->image;
         }
 
-        return view('admin.apartments.show', compact('apartment', 'facilities', 'imagePrefix'));
+        return view('admin.apartments.show', compact('apartment', 'facilities', 'imagePrefix','sponsorships'));
     }
 
     /**

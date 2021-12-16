@@ -40,12 +40,11 @@
                     </form>
                 </div>
               </div>
+              {{-- Braintree container --}}
               <div class="col-12 p-5">
-                <div id="dropin-container"></div>
-                <div class="col-12 text-center">
-                  <button id="submit-button" class="btn btn-primary">Richiesta metodo di pagamento</button>
-                </div>              
+                <div id="appBraintree"></div>                     
               </div>
+              {{-- Map conatiner --}}
               <div class="col-12 col-md-8" id="maps">
                 <div id="map" style="width: 100%; height: 100%;"></div>
               </div>
@@ -55,48 +54,8 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript">
-
-var button = document.querySelector('#submit-button');
-
-    braintree.dropin.create({
-      authorization: 'sandbox_kt5jprdn_ptngw3wjz8jfcmh5',
-      container: '#dropin-container',
-      vaultManager: true,
-      card: {
-        cardholderName: {
-          required: true
-        },
-        overrides: {
-          fields: {
-            number: {
-              placeholder: 'Numero Carta',
-              formatInput: false // Turn off automatic formatting
-            },
-            cardholderName:{
-              placeholder: 'Nome proprietario carta',
-            }
-          }
-        }
-      },
-/*       paypal: {
-        flow: 'checkout',
-        buttonStyle: {
-          color: 'blue',
-          shape: 'rect',
-          size: 'medium'
-        }
-      }, */
-      
-    }, function (createErr, instance) {
-      button.addEventListener('click', function () {
-        instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
-          // Submit payload.nonce to your server
-          console.log(payload);
-          console.log(requestPaymentMethodErr);
-        });
-      });
-    });
+<script src="{{ asset('js/appBraintree.js') }}"></script>
+<script type="text/javascript"> 
 
 
 let lat = {{$apartment->lat}}
