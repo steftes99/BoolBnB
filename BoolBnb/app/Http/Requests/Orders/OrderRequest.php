@@ -26,7 +26,7 @@ class OrderRequest extends FormRequest
     {
         return [
             'token'=> 'required',
-            'Sponsorship'=> [
+            'sponsorship'=> [
                 'required',
                 new ValidSponsorship()
             ]

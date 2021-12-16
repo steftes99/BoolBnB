@@ -22,30 +22,35 @@
                   <div class="d-flex">
                     
                     @foreach ($apartment->facilities as $facility)
-                    
                       <p class="card-text p-1">{{ $facility->name }}</p>
-  
-                
                   @endforeach
                   </div>
-                 
+  
                   <a href="{{route('admin.apartments.index')}}">Torna indietro</a>
-                  <a class="btn btn-primary" href="{{route('admin.apartments.edit', ['apartment' => $apartment->id])}}">Modifica</a>
-                  <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id ]) }}" 
-                    method="POST"
-                    class="delete-form">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Elimina</button>
-                    </form>
+
+                  @if ( Auth::user()->id == $apartment->user->id)
+                      <a class="btn btn-primary" href="{{route('admin.apartments.edit', ['apartment' => $apartment->id])}}">Modifica</a>
+                      <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id ]) }}" 
+                          method="POST"
+                          class="delete-form">
+                          @method('DELETE')
+                          @csrf
+                          <button type="submit" class="btn btn-danger">Elimina</button>
+                      </form>
+                  @endif
+                  
                 </div>
               </div>
-              <div class="col-12 p-5">
-                <div id="dropin-container"></div>
-                <div class="col-12 text-center">
-                  <button id="submit-button" class="btn btn-primary">Richiesta metodo di pagamento</button>
-                </div>              
-              </div>
+              @if ( Auth::user()->id == $apartment->user->id)
+                <div class="col-12 p-5">
+                  <div id="dropin-container"></div>
+                  <div class="col-12 text-center">
+                    <button id="submit-button" class="btn btn-primary">Richiesta metodo di pagamento</button>
+                  </div>              
+                </div>
+              @endif
+                
+
               <div class="col-12 col-md-8" id="maps">
                 <div id="map" style="width: 100%; height: 100%;"></div>
               </div>

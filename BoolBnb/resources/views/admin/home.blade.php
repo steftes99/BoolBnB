@@ -32,7 +32,7 @@
                         <i class="fas fa-envelope fa-8x mb-3"></i>
                     </div>
                     <h3 class="text-center">Messaggi ricevuti</h3>
-                    <a class="btn btn-dark _btn-color mt-1" href="">Visualizza</a>
+                    <a class="btn btn-dark _btn-color mt-1" href="{{ route('message.index') }}">Visualizza</a>
                 </div>
             </div>
         </div>
