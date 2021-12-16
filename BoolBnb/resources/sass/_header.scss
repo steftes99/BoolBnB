@@ -1,0 +1,22 @@
+._header-bg{
+    background-color: $gray;
+}
+._logo{
+    color: $pink;
+    font-size: 1.7rem;
+        &:hover{
+            text-decoration: none;
+            color: $pink;
+        }
+}
+
+._btn-color-2{
+    background-color: $pink;
+    border-color: $pink;
+}
+
+._border-pink{
+    border: 1px solid $pink;
+    border-radius: 5%;
+    color: white;
+}
