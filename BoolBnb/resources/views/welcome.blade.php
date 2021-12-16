@@ -29,7 +29,7 @@
                         
                             <div class="card-body _bg-card">
                                 <h2>Napoli</h2>
-                                <a href="#" class="btn btn-primary my-2">Scopri di più</a>
+                                <a href="{{ route('guest.apartments.index') }}" class="btn btn-primary my-2">Scopri di più</a>
                             </div>
                      </div>
                 </div>
@@ -43,7 +43,7 @@
                         
                             <div class="card-body _bg-card">
                                 <h2>Sardegna</h2>
-                                <a href="#" class="btn btn-primary my-2">Scopri di più</a>
+                                <a href="{{ route('guest.apartments.index') }}" class="btn btn-primary my-2">Scopri di più</a>
                             </div>
                      </div>
                 </div>
@@ -54,7 +54,7 @@
                         </div>
                             <div class="card-body _bg-card">
                                 <h2>Cortina</h2>
-                                <a href="#" class="btn btn-primary my-2">Scopri di più</a>
+                                <a href="{{ route('guest.apartments.index') }}" class="btn btn-primary my-2">Scopri di più</a>
                             </div>
                      </div>
                 </div>
@@ -65,7 +65,7 @@
                         </div>
                             <div class="card-body _bg-card">
                                 <h2>Trapani</h2>
-                                <a href="#" class="btn btn-primary my-2">Scopri di più</a>
+                                <a href="{{ route('guest.apartments.index') }}" class="btn btn-primary my-2">Scopri di più</a>
                             </div>
                      </div>
                 </div>
