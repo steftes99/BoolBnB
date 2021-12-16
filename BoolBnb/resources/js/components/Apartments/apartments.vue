@@ -112,7 +112,7 @@ import Apartment from './apartment';
 
                 newMarker(){
                 console.log('new marker in console')
-                this.searchedApartment.forEach((element) =>{
+                this.apartments.forEach((element) =>{
 
                     if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20){
                         
@@ -139,7 +139,7 @@ import Apartment from './apartment';
                     }
                 })
                 .then( (response) => {
-                    this.apartments = [];
+                    // this.apartments = [];
                     this.searchedApartment=[];
                     response.data.apartments.forEach(apartment => {
                         if((apartment.city.toLowerCase().includes(search.toLowerCase()) || 
