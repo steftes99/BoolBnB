@@ -1,22 +1,22 @@
 .home-wrapper{
-    background-color: $light-brown;
+    // background-color: $light-brown;
 }
 .jumbo{
-    background-color: $dark-gray;
-    background-size: auto;
+    background: rgb(134,179,209);
+    background: linear-gradient(90deg, rgba(134,179,209,1) 0%, rgba(224,115,126,1) 57%, rgba(248,249,250,1) 100%);  
     height: 30vh;
         h1{
-            color: $light-blue;
+            color: white;
         }
 }
 h3{
-    color: $light-blue;
+    color: $dark-gray;
 }
 ._img-container{
     width: 50%;
     height: 70%;
         i{
-            color: $light-blue;
+            color: $pink;
         }
 }
 ._btn-color{
@@ -24,9 +24,13 @@ h3{
     border-color: $light-blue;
     color: $dark-gray;
         &:hover{
-            background-color: $brown;
-            border-color: $brown;
+            background-color: $pink;
+            border-color: $pink;
         } 
+}
+._border{
+    border: 1px solid $gray;
+    border-radius: 5%;
 }
 
 

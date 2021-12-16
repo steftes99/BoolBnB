@@ -1,6 +1,6 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-light bg-light d-flex justify-content-between">
-        <a class="navbar-brand" href="{{ url('/') }}">BoolBnB</a>
+    <nav class="navbar navbar-expand-md navbar-light d-flex justify-content-between _header-bg">
+        <a class=" _logo" href="{{ url('/') }}">BoolBnB</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
