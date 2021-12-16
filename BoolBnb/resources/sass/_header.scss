@@ -13,10 +13,32 @@
 ._btn-color-2{
     background-color: $pink;
     border-color: $pink;
+        &:hover{
+            background-color: $light-blue;
+            border-color: $light-blue;
+            color: $dark-gray;
+        }
 }
 
 ._border-pink{
     border: 1px solid $pink;
     border-radius: 5%;
     color: white;
+        &:hover{
+            text-decoration: none;
+            color: white;
+        }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

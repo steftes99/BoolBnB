@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);/*!
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap);/*!
  * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
@@ -4637,7 +4637,7 @@ readers do not read off random characters that represent icons */
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Nunito", sans-serif;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -4660,7 +4660,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
@@ -10205,7 +10205,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -10307,7 +10307,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Nunito", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -14641,10 +14641,19 @@ h3 {
   background-color: #e7717d;
   border-color: #e7717d;
 }
+._btn-color-2:hover {
+  background-color: #86b3d1;
+  border-color: #86b3d1;
+  color: #474853;
+}
 
 ._border-pink {
   border: 1px solid #e7717d;
   border-radius: 5%;
+  color: white;
+}
+._border-pink:hover {
+  text-decoration: none;
   color: white;
 }
 
@@ -14656,14 +14665,70 @@ body {
 
 .bg_img {
   height: 100vh;
+  width: 100%;
   background-image: url("../assets/img/Colosseo.jpg");
-  background-size: cover;
+  background-size: 100% 100%;
 }
 .bg_img h2 {
   color: white;
 }
 .bg_img h1 {
   color: white;
+}
+
+._hover-welcome:hover {
+  background-color: #e7717d;
+  border-color: #e7717d;
+}
+
+.img-container {
+  width: 100%;
+  height: 20vh;
+}
+.img-container ._cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+}
+
+._napoli {
+  background-image: url("../assets/img/napoli-definitiva.jpg");
+  background-size: cover;
+}
+
+._mare {
+  background-image: url("../assets/img/mare-stilizzato.jpg");
+  background-size: cover;
+}
+
+._neve {
+  background-image: url("../assets/img/neve-2.jpg");
+  background-size: cover;
+}
+
+._trapani {
+  background-image: url("../assets/img/trapani-2.jpg");
+  background-size: cover;
+}
+
+._bg-card {
+  background-color: #e7717d;
+}
+._bg-card h2 {
+  color: white;
+}
+._bg-card a {
+  background-color: #474853;
+  border-color: #474853;
+}
+._bg-card a:hover {
+  background-color: #86b3d1;
+  border-color: #86b3d1;
+  color: #474853;
+}
+
+.dark-title {
+  color: #474853;
 }
 
 #maps {

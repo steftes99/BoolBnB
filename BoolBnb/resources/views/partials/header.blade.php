@@ -20,7 +20,7 @@
                     @endif
             
                 @else
-                <a class="btn btn-primary _btn-color-2" href="{{ route('admin.home') }}">Il tuo account</a>
+                <a class="btn btn-primary _btn-color-2 d-flex align-items-center" href="{{ route('admin.home') }}">Il tuo account</a>
 
                 <li class="nav-item dropdown d-flex align-items-center">
                     <a id="navbarDropdown" class=" dropdown-toggle _border-pink p-2 mx-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
