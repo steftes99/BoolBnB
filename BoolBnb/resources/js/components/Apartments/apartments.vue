@@ -123,7 +123,7 @@ import Apartment from './apartment';
 
             showMap(){  
                 let indirizzo = 'roma-' + this.search.split(' ').join('-');
-                let ricercaIndirizzo = 'http://api.tomtom.com/search/2/geocode/'+ indirizzo + '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ';
+                let ricercaIndirizzo = 'https://api.tomtom.com/search/2/geocode/'+ indirizzo + '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ';
                 $.getJSON(ricercaIndirizzo,function(task){
                           this.list = task;
                           console.log(this.list)
