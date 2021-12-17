@@ -14826,3 +14826,14 @@ p {
 .card-header h5 {
   color: #474853;
 }
+
+.background {
+  width: 100%;
+  height: 100%;
+  background: #e0737e;
+  background: linear-gradient(90deg, #e0737e 0%, #86b3d1 50%, #e0737e 100%);
+}
+
+.dark-gray {
+  color: #474853;
+}
