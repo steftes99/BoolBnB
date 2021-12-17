@@ -6,7 +6,7 @@
             <h1 class="text-center">Appartamenti</h1>
                 <div class="left-searchbar ">
                     <input id="contacts-filter" class="form-control" type="text"
-                    placeholder="Cerca per città o indirizzo" name="search" v-model="search" >
+                    placeholder="Cerca per indirizzo" name="search" v-model="search" >
 
                     <h3>Cerca per servizi</h3>
                     <div class="d-flex justify-content-center flex-wrap">
@@ -16,7 +16,8 @@
                         </div>
                         
                     </div>
-                    <button @click="searchApartment(search,searchFacilities); " class="btn btn-primary">Cerca</button>
+                    <button @click="searchApartment(search,searchFacilities); showMap() " class="btn btn-primary">Cerca</button>
+                    <h3>Appartamenti nelle vicinanze dell'indirizzo cercato:</h3>
                 </div>
                 <div class="row">
                     <Apartment v-for="apartment in searchedApartment " :key="apartment.id" :apartment="apartment"/>
@@ -41,9 +42,9 @@ import Apartment from './apartment';
                 searchFacilities: [],
                 map:{},
                 searchedApartment:[],
-                nearestApartments:[],
                 my_lat:42.564525,
                 my_long:12.03356,
+                list:[],
 
             }
         },
@@ -52,6 +53,7 @@ import Apartment from './apartment';
         },
 
         methods: {
+
            getApartments(){
                axios.get('http://127.0.0.1:8000/api/api/apartments')
                .then((res) => {
@@ -88,13 +90,9 @@ import Apartment from './apartment';
                     }
                 },
 
-
-            
-
             deg2rad(deg) {
                 return deg * (Math.PI/180)
                 },
-
 
             getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
                 var R = 6371; // Radius of the earth in km
@@ -111,56 +109,30 @@ import Apartment from './apartment';
                 },
 
                 newMarker(){
-                console.log('new marker in console')
-                this.searchedApartment.forEach((element) =>{
+                    this.apartments.forEach((element) =>{
 
-                    if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20){
-                        
-                        var marker ;
-                        marker = new tt.Marker()
-
-                    .setLngLat([element.long, element.lat])
-                    .addTo(this.map);
-                    }
-                    
-                    
-                    })
-
-                
-
-            },
-
-
-            searchApartment(search,searchFacilities){
-                axios.get("http://127.0.0.1:8000/api/api/apartments", {
-                    params: {
-                        query: search,
-                        array: searchFacilities,
-                    }
-                })
-                .then( (response) => {
-                    this.apartments = [];
-                    this.searchedApartment=[];
-                    response.data.apartments.forEach(apartment => {
-                        if((apartment.city.toLowerCase().includes(search.toLowerCase()) || 
-                        apartment.address.toLowerCase().includes(search.toLowerCase())) &&
-                        this.compareFacilities(apartment.facilities,searchFacilities)){
+                        if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20){
                             
-                            if(!this.searchedApartment.includes(apartment)){
-                                this.searchedApartment.push(apartment);
-                                this.search = ""
-                                this.searchFacilities = [];
+                            var marker ;
+                            marker = new tt.Marker()
+                            .setLngLat([element.long, element.lat])
+                            .addTo(this.map);
+                        }                                       
+                    })                
+                },
 
-                            }
+            showMap(){  
+                let indirizzo = 'roma-' + this.search.split(' ').join('-');
+                let ricercaIndirizzo = 'http://api.tomtom.com/search/2/geocode/'+ indirizzo + '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ';
+                $.getJSON(ricercaIndirizzo,function(task){
+                          this.list = task;
+                          console.log(this.list)
+                          var addressLat = this.list.results[0].position.lat;
+                          var addressLong = this.list.results[0].position.lon;
+                          this.my_lat = addressLat;
+                          this.my_long = addressLong;
 
-                            this.my_lat='';
-                            this.my_long='';
-                            this.my_long = this.searchedApartment[0].long;
-                            this.my_lat = this.searchedApartment[0].lat;
-                            
-
-                            
-                            this.map = tt.map({
+                           this.map = tt.map({
                                 key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
                                 container:'map',
                                 center: [this.my_long, this.my_lat ],
@@ -172,18 +144,36 @@ import Apartment from './apartment';
                             
                             this.newMarker()
 
-                            console.log(this.apartments)
+                        }.bind(this));
+            }, 
 
+            searchApartment(search,searchFacilities){
+                axios.get("http://127.0.0.1:8000/api/api/apartments", {
+                    params: {
+                        query: search,
+                        array: searchFacilities,
+                    }
+                })
+                .then( (response) => {
+                    this.searchedApartment=[];
+                    response.data.apartments.forEach(apartment => {
+                        if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,apartment.lat,apartment.long) < 20 &&
+                        this.compareFacilities(apartment.facilities,searchFacilities)){
+                            
+                            if(!this.searchedApartment.includes(apartment)){
+                                this.searchedApartment.push(apartment);
+                                this.search = ""
+                                this.searchFacilities = [];
+
+                            }
                         }
                     });
                 }).catch( (error) =>{
-                    console.log(error);
-                }).then( () =>{
-                    this.loading = false;
-                });
+                        console.log(error);
+                    }).then( () =>{
+                        this.loading = false;
+                    });
             },
-
-            
             
         },
 
@@ -195,7 +185,6 @@ import Apartment from './apartment';
             this.getFacilities();
             
 
-
             this.map = tt.map({
                 key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
                 container:'map',
@@ -204,12 +193,8 @@ import Apartment from './apartment';
             });
             this.map.addControl(new tt.FullscreenControl());
             this.map.addControl(new tt.NavigationControl());
-                
-
-        
         
         },
-        
     }
 
 </script>
