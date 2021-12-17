@@ -8,12 +8,65 @@ body{
 
 .bg_img{
     height: 100vh;
+    width: 100%;
     background-image: url('../assets/img/Colosseo.jpg');
-    background-size: cover;
+    background-size: 100% 100%;
         h2{
             color: white;
         }
         h1{
             color: white;
         }
+}
+
+._hover-welcome{
+    &:hover{
+        background-color: $pink;
+        border-color: $pink;
+    }
+}
+
+.img-container{
+    width: 100%;
+    height: 20vh;
+        ._cover{
+            object-fit: cover;
+            height: 100%;
+        }
+}
+._napoli{
+    background-image: url('../assets/img/napoli-definitiva.jpg');
+    background-size: cover;
+}
+._mare{
+    background-image: url('../assets/img/mare-stilizzato.jpg');
+    background-size: cover;
+}
+._neve{
+    background-image: url('../assets/img/neve-2.jpg');
+    background-size: cover;
+}
+._trapani{
+    background-image: url('../assets/img/trapani-2.jpg');
+    background-size: cover;
+}
+
+._bg-card{
+    background-color: $pink;
+        h2{
+            color: white;
+        }
+        a{
+            background-color: $dark-gray;
+            border-color: $dark-gray;
+                &:hover{
+                    background-color: $light-blue;
+                    border-color: $light-blue;
+                    color: $dark-gray;
+                }
+        }
+}
+
+.dark-title{
+    color: $dark-gray;
 }

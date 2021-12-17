@@ -11,19 +11,19 @@
 
             @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="btn btn-primary _btn-color mx-1" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="btn btn-primary _btn-color" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
             
                 @else
-                <a class="nav-link" href="{{ route('admin.home') }}">Il tuo account</a>
+                <a class="btn btn-primary _btn-color-2 d-flex align-items-center" href="{{ route('admin.home') }}">Il tuo account</a>
 
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <li class="nav-item dropdown d-flex align-items-center">
+                    <a id="navbarDropdown" class=" dropdown-toggle _border-pink p-2 mx-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
                     </a>
 
