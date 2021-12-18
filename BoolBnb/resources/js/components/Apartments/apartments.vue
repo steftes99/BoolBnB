@@ -1,14 +1,13 @@
 <template>
     <div class="container">
-        <div id="map" class="map"></div>
-
-        <section id="apartment-list">
-            <h1 class="text-center">Appartamenti</h1>
+        <div class="row">
+            <div class="col-12 my-5">
+                <section id="apartment-list">
                 <div class="left-searchbar ">
                     <input id="contacts-filter" class="form-control" type="text"
                     placeholder="Cerca per indirizzo" name="search" v-model="search" >
 
-                    <h3>Cerca per servizi</h3>
+                    <h3 class="my-3">Servizi:</h3>
                     <div class="d-flex justify-content-center flex-wrap">
                         <div v-for="facility in facilities" :key="facility.id" class="custom-control-inline custom-checkbox">
                             <input class="custom-control-input" type="checkbox" :id="'facility-'+facility.id" v-model="searchFacilities" name="searchFacilities[]" :value="facility.id">
@@ -16,15 +15,34 @@
                         </div>
                         
                     </div>
-                    <button @click="searchApartment(search,searchFacilities); showMap() " class="btn btn-primary">Cerca</button>
-                    <h3>Appartamenti nelle vicinanze dell'indirizzo cercato:</h3>
+                    <div class="d-flex mt-3 justify-content-center align-items-center">
+                        <button @click="searchApartment(search,searchFacilities); showMap() " class="btn btn-primary _btn-color">Cerca</button>
+                    </div>
+                    
+                    <h3 class="mt-3">Appartamenti nelle vicinanze dell'indirizzo cercato:</h3>
                 </div>
-                <div class="row">
-                    <Apartment v-for="apartment in searchedApartment " :key="apartment.id" :apartment="apartment"/>
-                </div>
+
             
     
         </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12 _scroll">
+                        <Apartment v-for="apartment in searchedApartment " :key="apartment.id" :apartment="apartment"/>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-6 p-1">
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+        
+
+        
     </div>
 </template>
 
@@ -205,7 +223,7 @@ import Apartment from './apartment';
     }
     .map{
         width: 100%;
-        height: 40vh;
+        height: 60vh;
     }
 </style>
 

@@ -11,7 +11,7 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">{{$apartment->title}}</h5>
-                  <p class="card-text">{{ $apartment->region }}</p>
+                  <p class="card-text">{{ $apartment->region}}. <span>{{ $apartment->city}}</span></p>
                   <p class="card-text">{{$apartment->city}}</p>
                   <p class="card-text">{{ $apartment->address }}</p>
                   <p class="card-text"> <strong>Letti: </strong>{{$apartment->beds}}</p>
@@ -57,7 +57,7 @@
                 
 
               <div class="col-12 col-md-8" id="maps">
-                <div id="map" style="width: 100%; height: 100%;"></div>
+                <div id="map"></div>
               </div>
             </div>
           </div>
