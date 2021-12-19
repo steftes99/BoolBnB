@@ -1,17 +1,27 @@
 <template>
   <div id="braintree">
         <div class="row justify-content-center align-items-center">
-            <SponsorshipCard v-for="sponsorship in sponsorships" :key="sponsorship.id" :sponsorship="sponsorship" @token="tokenized" />   
+            <SponsorshipCard v-for="sponsorship in sponsorships" :key="sponsorship.id" :sponsorship="sponsorship" @token="tokenized" @duration="duration" @price="price" /> 
+            <div v-if="durations.length > 0 || prices.length > 0" class="col-12 text-center py-2 p-lg-3">
+                <h5>hai scelto la sponsorizzazione da {{durations}} ore al costo di {{prices}} &euro;</h5>
+            </div>
+            <div v-else class="col-12 text-center py-2 p-lg-3">
+                <h5>Non hai scelto la sponsorizzazione</h5>
+            </div>  
         </div>
-
         <div class="row justify-content-center p-3" v-if="payment">
             <v-braintree 
                 :authorization="token"
                 @success="onSuccess"
                 @error="onError"
-                locale="it_IT">
+                locale="it_IT"
+                btnText="Paga"
+                >
 
             </v-braintree>
+        </div>
+        <div class="col-12 text-center py-2">
+            <h3>{{response}}</h3>
         </div>     
   </div>
 </template>
@@ -31,6 +41,9 @@ export default {
             sponsorships: [],
             token:'',
             payment:false,
+            prices:'',
+            durations:'',
+            response:'',
             form:{
                 token: '',
                 sponsorship:''
@@ -94,6 +107,7 @@ export default {
             axios.post("http://localhost:8000/api/make/payment", {...this.form})
             .then((response) => {
             let resp = response.data;
+            this.response = resp.messagge;
             console.log(resp);
             })
                 .catch((error) => {
@@ -103,6 +117,12 @@ export default {
                 .then(() => {
                 this.payment = true;
             });
+        },
+        price(price){
+            this.prices = price;
+        },
+        duration(duration){
+            this.durations = duration;
         }
     },
 }

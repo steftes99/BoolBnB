@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Orders;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Orders\OrderRequest;
+use App\Models\Apartment;
 use App\Models\Sponsorship;
 use Braintree\Gateway;
 use Illuminate\Http\Request;
@@ -35,7 +36,6 @@ class OrderController extends Controller
                 'success'=> true,
                 'messagge'=>'transazione eseguita con successo'
             ];
-
             return response()->json($data , 200);
 
         }else{
