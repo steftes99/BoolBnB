@@ -10,18 +10,28 @@
             </div>  
         </div>
         <div class="row justify-content-center p-3" v-if="payment">
-            <v-braintree 
-                :authorization="token"
-                @success="onSuccess"
-                @error="onError"
-                locale="it_IT"
-                btnText="Paga"
-                >
+            <div class="col-12">
+                <v-braintree 
+                    :authorization="token"
+                    @success="onSuccess"
+                    @error="onError"
+                    locale="it_IT"
+                    btnText="Paga"
+                    :vaultManager="vault"
+                    @load="onLoad"
+                    >
 
-            </v-braintree>
+                </v-braintree>
+            </div>
+            <div v-if="loading" class="col-12 p-2 text-center">
+                <h4>Caricamento....</h4>
+            </div>
+            <div v-else class="col-12 p-2 text-center">
+                <h4>Procedi con l'aquisto</h4>
+            </div>             
         </div>
         <div class="col-12 text-center py-2">
-            <h3>{{response}}</h3>
+            <h3 class="text-danger">{{response}}</h3>
         </div>     
   </div>
 </template>
@@ -37,8 +47,10 @@ export default {
     name: "appBraintree",
     data() {
         return {
-            loading: true,
+            vault: true,
+            loading: false,
             sponsorships: [],
+            disableBuyButton:false,
             token:'',
             payment:false,
             prices:'',
@@ -51,7 +63,6 @@ export default {
         };
     },
     mounted() {
-        this.loading = true;
         axios.get("http://127.0.0.1:8000/api/api/apartments")
             .then((response) => {
             this.sponsorships = response.data.sponsorships;
@@ -61,15 +72,13 @@ export default {
             // handle error
             console.log(error);
         })
-            .then(() => {
-            this.loading = true;
-        });
     },
     components: { 
         SponsorshipCard,
     },
     methods: {
         tokenized(number){
+            this.loading = true;
             axios.get("http://localhost:8000/api/orders")
             .then((response) => {
             this.token = response.data.token;
@@ -81,6 +90,7 @@ export default {
                 console.log(error);
             })
                 .then(() => {
+                this.loading = false;
                 this.payment = true;
             });
         },
@@ -104,18 +114,20 @@ export default {
             this.buy();
         },
         buy(){
+            this.loading = false;
             axios.post("http://localhost:8000/api/make/payment", {...this.form})
             .then((response) => {
             let resp = response.data;
             this.response = resp.messagge;
-            console.log(resp);
+            /* console.log(resp); */
             })
                 .catch((error) => {
                 // handle error
                 console.log(error);
             })
                 .then(() => {
-                this.payment = true;
+                this.payment = false;
+
             });
         },
         price(price){
@@ -123,7 +135,11 @@ export default {
         },
         duration(duration){
             this.durations = duration;
-        }
+        },
+        onLoad(){
+            this.loading = true;
+            this.disableBuyButton = true;
+        },
     },
 }
 </script>

@@ -48,10 +48,7 @@
               </div>
               {{-- Map conatiner --}}
                 <div class="col-12 p-5">
-                  <div id="dropin-container"></div>
-                  <div class="col-12 text-center">
-                    <button id="submit-button" class="btn btn-primary">Richiesta metodo di pagamento</button>
-                  </div>              
+                  <div id="dropin-container"></div>              
                 </div>
               @endif
                 
