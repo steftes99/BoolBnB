@@ -60,8 +60,8 @@ import Apartment from './apartment';
                 searchFacilities: [],
                 map:{},
                 searchedApartment:[],
-                my_lat:42.564525,
-                my_long:12.03356,
+                my_lat:41.89056,
+                my_long:12.49427,
                 list:[],
 
             }
@@ -129,12 +129,14 @@ import Apartment from './apartment';
                 newMarker(){
                     this.apartments.forEach((element) =>{
 
-                        if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20){
+                        if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20  && 
+                         this.compareFacilities(element.facilities,this.searchFacilities) == true ){
+
                             
                             var marker ;
                             marker = new tt.Marker()
                             .setLngLat([element.long, element.lat])
-                            .addTo(this.map);
+                            .addTo(this.map)
                         }                                       
                     })                
                 },
@@ -144,7 +146,7 @@ import Apartment from './apartment';
                 let ricercaIndirizzo = 'https://api.tomtom.com/search/2/geocode/'+ indirizzo + '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ';
                 $.getJSON(ricercaIndirizzo,function(task){
                           this.list = task;
-                          console.log(this.list)
+                          console.log(this.list.results)
                           var addressLat = this.list.results[0].position.lat;
                           var addressLong = this.list.results[0].position.lon;
                           this.my_lat = addressLat;
@@ -154,7 +156,7 @@ import Apartment from './apartment';
                                 key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
                                 container:'map',
                                 center: [this.my_long, this.my_lat ],
-                                zoom: 12,
+                                zoom: 13,
                             });
                             this.map.addControl(new tt.FullscreenControl());
                             this.map.addControl(new tt.NavigationControl());
@@ -175,8 +177,8 @@ import Apartment from './apartment';
                 .then( (response) => {
                     this.searchedApartment=[];
                     response.data.apartments.forEach(apartment => {
-                        if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,apartment.lat,apartment.long) < 20 &&
-                        this.compareFacilities(apartment.facilities,searchFacilities)){
+                        if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,apartment.lat,apartment.long) < 20 && 
+                         this.compareFacilities(apartment.facilities,searchFacilities) == true ){
                             
                             if(!this.searchedApartment.includes(apartment)){
                                 this.searchedApartment.push(apartment);
@@ -207,7 +209,7 @@ import Apartment from './apartment';
                 key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
                 container:'map',
                 center: [this.my_long, this.my_lat ],
-                zoom: 2,
+                zoom: 10,
             });
             this.map.addControl(new tt.FullscreenControl());
             this.map.addControl(new tt.NavigationControl());
