@@ -41,7 +41,7 @@
                 class="btn _btn-color-2"
                 >
                 {{
-                    loadingPayment ? 'Loading...' : 'Procedi con l\'acquisto '
+                    loading ? 'Caricamento...' : 'Procedi con l\'acquisto '
                 }}
             </button>             
         </div>
@@ -113,7 +113,7 @@ export default {
         let nonce = payload.nonce;
         this.form.token = nonce;
 
-        console.log(nonce);
+        /* console.log(nonce); */
         this.buy()
         },
         onError (error) {
@@ -127,9 +127,11 @@ export default {
         },
         beforeBuy(){
              this.$refs.paymentBtnRef.click();
+             this.disableBuyButton = false;
         },
         async buy(){
-            this.loading = false;
+            this.disableBuyButton = true;
+            this.loading = true;
             axios.post("http://localhost:8000/api/make/payment", {...this.form})
             .then((response) => {
             let resp = response.data;
