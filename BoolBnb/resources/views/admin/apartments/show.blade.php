@@ -1,45 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-@csrf
-    <div class="container">
+  <div class="background">
+    @csrf
+    <div class="container p-5">
         <div class="card mb-3">
             <div class="row no-gutters">
-              <div class="col-md-4">
+              <div class="col-md-5">
                 <img src="{{$imagePrefix}}" style="width: 100%" alt="{{$apartment->title}} image">
               </div>
-              <div class="col-md-8">
+              <div class="col-md-6">
                 <div class="card-body">
-                  <h5 class="card-title">{{$apartment->title}}</h5>
-                  <p class="card-text">{{ $apartment->region}}. <span>{{ $apartment->city}}</span></p>
-                  <p class="card-text">{{$apartment->city}}</p>
+                  <h5 class="card-title text-capitalize">{{$apartment->title}}</h5>
+                  <p class="card-text">{{ $apartment->city}}, <span>{{ $apartment->region}}</span></p>
                   <p class="card-text">{{ $apartment->address }}</p>
-                  <p class="card-text"> <strong>Letti: </strong>{{$apartment->beds}}</p>
-                  <p class="card-text"><strong>Stanze: </strong>{{$apartment->rooms}}</p>
-                  <p class="card-text"><strong>Bagni: </strong>{{$apartment->bathrooms}}</p>
+                  <span class="card-text"> <strong>Letti: </strong>{{$apartment->beds}}, </span>
+                  <span class="card-text"><strong>Stanze: </strong>{{$apartment->rooms}}</span>
+                  <p class="card-text mt-2"><strong>Bagni: </strong>{{$apartment->bathrooms}}</p>
                   <p class="card-text"><strong>Metri quadri: </strong>{{$apartment->square}}</p>
                   
-                  <div class="d-flex">
-                    
-                    @foreach ($apartment->facilities as $facility)
-                      <p class="card-text p-1">{{ $facility->name }}</p>
-                  @endforeach
-                  </div>
+                  <div class="d-flex align-items-center">
   
-                  <a href="{{route('admin.apartments.index')}}">Torna indietro</a>
+                    @foreach ($apartment->facilities as $facility)
+                      
+                        <p class="mr-1 text-capitalize">{{ $facility->name }}, </p>
+    
+                  
+                    @endforeach
+                    </div>
+  
+                  
 
                   @if ( Auth::user()->id == $apartment->user->id)
-                      <a class="btn btn-primary" href="{{route('admin.apartments.edit', ['apartment' => $apartment->id])}}">Modifica</a>
+                  <div class=" d-flex justify-content-start">
+                    <a class="btn btn-primary _btn-color mr-1" href="{{route('admin.apartments.edit', ['apartment' => $apartment->id])}}">Modifica</a>
                       <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id ]) }}" 
                           method="POST"
                           class="delete-form">
                           @method('DELETE')
                           @csrf
-                          <button type="submit" class="btn btn-danger">Elimina</button>
+                          <button type="submit" class="btn btn-danger _btn-color-2">Elimina</button>
                       </form>
+                  </div>
+                      
                   @endif
                   
                 </div>
+               
+              </div>
+              <div class="col-md-1 pr-3 pt-3">
+                <a href="{{route('admin.apartments.index')}}" class="_link-pink">Torna indietro</a>
               </div>
               @if ( Auth::user()->id == $apartment->user->id)
               {{-- Braintree container --}}
@@ -59,6 +69,9 @@
             </div>
           </div>
     </div>
+  </div>
+
+
 @endsection
 
 @section('scripts')
