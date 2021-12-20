@@ -6,6 +6,7 @@
                 <div class="left-searchbar ">
                     <input id="contacts-filter" class="form-control" type="text"
                     placeholder="Cerca per indirizzo" name="search" v-model="search" >
+                    <h4 id="empty_search" class="text-danger my-2"></h4>
 
                     <h3 class="my-3">Servizi:</h3>
                     <div class="d-flex justify-content-center flex-wrap">
@@ -124,94 +125,105 @@ import Apartment from './apartment';
                 var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
                 var d = R * c; // Distance in km
                 return d;
-                },
+            },
                 
 
-                createMarker() {
-                    this.apartments.forEach((element) =>{
+            createMarker() {
+                this.apartments.forEach((element) =>{
 
-                        if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20  && 
-                         this.compareFacilities(element.facilities,this.searchFacilities) == true ){
-            var markerElement = document.createElement('div');
-            markerElement.className = 'marker';
+                    if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20  && 
+                        this.compareFacilities(element.facilities,this.searchFacilities) == true ){
 
-            var markerContentElement = document.createElement('div');
-            markerContentElement.className = 'marker-content';
-            markerContentElement.style.backgroundColor = '#e7717d';
-            markerElement.appendChild(markerContentElement);
+                    var markerElement = document.createElement('div');
+                    markerElement.className = 'marker';
 
-            var iconElement = document.createElement('div');
-            iconElement.className = 'marker-icon';
-            iconElement.style.backgroundImage =
-                'url(https://www.downloadclipart.net/large/60667-small-house-clipart.png)';
-            markerContentElement.appendChild(iconElement);
+                    var markerContentElement = document.createElement('div');
+                    markerContentElement.className = 'marker-content';
+                    markerContentElement.style.backgroundColor = '#e7717d';
+                    markerElement.appendChild(markerContentElement);
 
-            var popup = new tt.Popup({offset: 30})
-            .setText(
-                element.title + ' ' + element.address);
-            // add marker to map
-            new tt.Marker({element: markerElement, anchor: 'bottom'})
-                .setLngLat([element.long, element.lat])
-                .setPopup(popup)
-                .addTo(this.map);
+                    var iconElement = document.createElement('div');
+                    iconElement.className = 'marker-icon';
+                    iconElement.style.backgroundImage =
+                        'url(https://www.downloadclipart.net/large/60667-small-house-clipart.png)';
+                    markerContentElement.appendChild(iconElement);
 
-                         }})
-        },
+                    var popup = new tt.Popup({offset: 30})
+                    .setText(
+                        element.title + ' ' + element.address);
+                    // add marker to map
+                    new tt.Marker({element: markerElement, anchor: 'bottom'})
+                        .setLngLat([element.long, element.lat])
+                        .setPopup(popup)
+                        .addTo(this.map);
 
-                newMarker(){
-                    this.apartments.forEach((element) =>{
+                                }})
+            },
 
-                        if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20  && 
-                         this.compareFacilities(element.facilities,this.searchFacilities) == true ){
+            newMarker(){
+                this.apartments.forEach((element) =>{
+
+                    if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20  && 
+                        this.compareFacilities(element.facilities,this.searchFacilities) == true ){
 
                             
-                            var marker ;
-                            marker = new tt.Marker()
-                            .setLngLat([element.long, element.lat])
-                            .addTo(this.map)
-                            var popupOffsets = {
-                                top: [0, 0],
-                                bottom: [0, -70],
-                                'bottom-right': [0, -70],
-                                'bottom-left': [0, -70],
-                                left: [25, -35],
-                                right: [-25, -35]
-                                }
+                        var marker ;
+                        marker = new tt.Marker()
+                        .setLngLat([element.long, element.lat])
+                        .addTo(this.map)
+                        var popupOffsets = {
+                            top: [0, 0],
+                            bottom: [0, -70],
+                            'bottom-right': [0, -70],
+                            'bottom-left': [0, -70],
+                            left: [25, -35],
+                            right: [-25, -35]
+                        }
 
-                            var popup = new tt.Popup({offset: popupOffsets })
+                        var popup = new tt.Popup({offset: popupOffsets })
                             .setHTML(element.address)
                             marker.setPopup(popup).togglePopup();
                         }                                       
                     })                
                 },
 
-            showMap(){  
-                let indirizzo = 'roma-' + this.search.split(' ').join('-');
-                let ricercaIndirizzo = 'https://api.tomtom.com/search/2/geocode/'+ indirizzo + '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ';
-                $.getJSON(ricercaIndirizzo,function(task){
-                          this.list = task;
-                          console.log(this.list.results)
-                          var addressLat = this.list.results[0].position.lat;
-                          var addressLong = this.list.results[0].position.lon;
-                          this.my_lat = addressLat;
-                          this.my_long = addressLong;
+            showMap(){
+                if(this.search == ''){
+                    document.getElementById("empty_search").innerHTML = 'Devi inserire un indirizzo';
+                }else{
+                    document.getElementById("empty_search").innerHTML = '';
 
-                           this.map = tt.map({
-                                key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
-                                container:'map',
-                                center: [this.my_long, this.my_lat ],
-                                zoom: 13,
-                            });
-                            this.map.addControl(new tt.FullscreenControl());
-                            this.map.addControl(new tt.NavigationControl());
+                
+                    let indirizzo = 'roma-' + this.search.split(' ').join('-');
+                    let ricercaIndirizzo = 'https://api.tomtom.com/search/2/geocode/'+ indirizzo + '.JSON?key=CskONgb89uswo1PwlNDOtG4txMKrp1yQ';
+                    $.getJSON(ricercaIndirizzo,function(task){
+                            this.list = task;
+                            console.log(this.list.results)
+                            var addressLat = this.list.results[0].position.lat;
+                            var addressLong = this.list.results[0].position.lon;
+                            this.my_lat = addressLat;
+                            this.my_long = addressLong;
 
-                            this.createMarker();
-                            /* this.newMarker() */
+                            this.map = tt.map({
+                                    key: "CskONgb89uswo1PwlNDOtG4txMKrp1yQ",
+                                    container:'map',
+                                    center: [this.my_long, this.my_lat ],
+                                    zoom: 13,
+                                });
+                                this.map.addControl(new tt.FullscreenControl());
+                                this.map.addControl(new tt.NavigationControl());
 
-                        }.bind(this));
+                                this.createMarker();
+                                /* this.newMarker() */
+
+                            }.bind(this));
+                }
             }, 
 
             searchApartment(search,searchFacilities){
+                if(this.search == ''){
+                   
+                }else{
                 axios.get("http://127.0.0.1:8000/api/api/apartments", {
                     params: {
                         query: search,
@@ -237,7 +249,8 @@ import Apartment from './apartment';
                     }).then( () =>{
                         this.loading = false;
                     });
-            },
+            }
+            }
             
         },
 
