@@ -56,8 +56,8 @@
               @endif
                 
 
-              <div class="col-12 col-md-8" id="maps">
-                <div id="map"></div>
+              <div class="col-12"  id="maps">
+                <div id="map" style="width: 100%; height:100%;"></div>
               </div>
             </div>
           </div>
