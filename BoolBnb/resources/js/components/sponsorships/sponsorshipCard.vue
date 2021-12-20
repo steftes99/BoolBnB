@@ -1,6 +1,6 @@
 <template>
     <div class="col-12 col-md-4 col-lg-2 py-2">
-        <button class="btn btn-secondary" @click="$emit('token',sponsorship.id),$emit('price',sponsorship.price),$emit('duration',sponsorship.hour_duration)">sponsorizza per {{sponsorship.hour_duration}} ore al costo di {{sponsorship.price}} &euro;</button>   
+        <button class="btn btn-secondary _gray" @click="$emit('token',sponsorship.id),$emit('price',sponsorship.price),$emit('duration',sponsorship.hour_duration)"> {{sponsorship.hour_duration}} ore, {{sponsorship.price}} &euro;</button>   
     </div>  
 </template>
 
@@ -19,6 +19,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+    @import '../../../sass/_variables.scss';
+    @import '../../../sass/_show.scss';
 
 </style>

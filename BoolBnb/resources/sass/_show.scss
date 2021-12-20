@@ -18,3 +18,10 @@
 ._margin{
     margin: 0 auto;
 }
+._gray{
+    border: 2px solid $pink;
+        &:hover{
+            background-color: $pink;
+            color: white;
+        }
+}

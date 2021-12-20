@@ -1,6 +1,10 @@
 <template>
   <div id="braintree">
         <div class="row justify-content-center align-items-center">
+            <div class="col-12 my-2">
+                <h2 class="text-center">Sponsorizza il tuo appartamento</h2>
+            </div>
+            
             <SponsorshipCard v-for="sponsorship in sponsorships" :key="sponsorship.id" :sponsorship="sponsorship" @token="tokenized" @duration="duration" @price="price" /> 
             <div v-if="durations.length > 0 || prices.length > 0" class="col-12 text-center py-2 p-lg-3">
                 <h5>hai scelto la sponsorizzazione da {{durations}} ore al costo di {{prices}} &euro;</h5>
@@ -154,6 +158,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+    @import '../../sass/_variables.scss';
+    @import '../../sass/_show.scss';
 
 </style>
