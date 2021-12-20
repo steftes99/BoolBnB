@@ -20,15 +20,26 @@
                     :vaultManager="vault"
                     @load="onLoad"
                     >
-
+                        <template #button="slotProps">
+                            <button @click="slotProps.submit" ref="paymentBtnRef"></button>
+                        </template>
                 </v-braintree>
             </div>
-            <div v-if="loading" class="col-12 p-2 text-center">
-                <h4>Caricamento....</h4>
-            </div>
-            <div v-else class="col-12 p-2 text-center">
-                <h4>Procedi con l'aquisto</h4>
-            </div>             
+            <button
+                v-if="!disableBuyButton"
+                class="btn btn-success"
+                @click.prevent="beforeBuy"
+                >
+                Procedi con l'acquisto 
+            </button>
+            <button
+                v-else
+                class="btn btn-info"
+                >
+                {{
+                    loadingPayment ? 'Loading...' : 'Procedi con l\'acquisto '
+                }}
+            </button>             
         </div>
         <div class="col-12 text-center py-2">
             <h3 class="text-danger">{{response}}</h3>
@@ -111,7 +122,7 @@ export default {
             this.$emit('onError', message);
         },
         beforeBuy(){
-            this.buy();
+             this.$refs.paymentBtnRef.click();
         },
         buy(){
             this.loading = false;
@@ -137,8 +148,7 @@ export default {
             this.durations = duration;
         },
         onLoad(){
-            this.loading = true;
-            this.disableBuyButton = true;
+            this.disableBuyButton = false;
         },
     },
 }

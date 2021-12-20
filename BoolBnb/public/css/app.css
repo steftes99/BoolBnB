@@ -4604,6 +4604,46 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
 @charset "UTF-8";
+.marker-icon {
+  background-position: center;
+  background-size: 22px 22px;
+  border-radius: 50%;
+  height: 22px;
+  left: 4px;
+  position: absolute;
+  text-align: center;
+  top: 3px;
+  transform: rotate(45deg);
+  width: 22px;
+}
+
+.marker {
+  height: 30px;
+  width: 30px;
+}
+
+.marker-content {
+  background: #c30b82;
+  border-radius: 50% 50% 50% 0;
+  height: 30px;
+  left: 50%;
+  margin: -15px 0 0 -15px;
+  position: absolute;
+  top: 50%;
+  transform: rotate(-45deg);
+  width: 30px;
+}
+
+.marker-content::before {
+  background: #ffffff;
+  border-radius: 50%;
+  content: "";
+  height: 24px;
+  margin: 3px 0 0 3px;
+  position: absolute;
+  width: 24px;
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -14739,6 +14779,23 @@ body {
   position: relative;
   width: 100%;
   height: 200px;
+}
+
+._title {
+  height: 30vh;
+  background: #f8f9fa;
+  background: linear-gradient(90deg, #f8f9fa 0%, #e0737e 50%, #f8f9fa 100%);
+}
+._title h1 {
+  color: white;
+}
+
+._apartment {
+  height: 20vh;
+}
+
+._margin {
+  margin: 0 auto;
 }
 
 .jumbo {
