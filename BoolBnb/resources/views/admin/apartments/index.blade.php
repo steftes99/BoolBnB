@@ -7,28 +7,47 @@
                 {{session('alert-message')}}
             </div>
         @endif
-        <div class="row">
-                @foreach ($apartments as $apartment)
-                
-                <div class="card col-3 m-3" style="width: 18rem;">
-                
-                 @if (!str_starts_with($apartment->image ,'http'))
-                    <img src="{{asset('storage/'.$apartment->image)}}" class="card-img-top" alt="{{$apartment->name}}">
-                 @else
-                    <img src="{{$apartment->image}}" class="card-img-top" alt="{{$apartment->name}}">
-                 @endif                    
-                    <div class="card-body">
-                      <h5 class="card-title">{{ $apartment->title }}</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="{{ route('admin.apartments.show', $apartment->id) }}" class="btn btn-primary">Go somewhere</a>
+    </div>
+        <div class="row m-0">
+            <div class="col-12 _title d-flex justify-content-center align-items-center">
+                <h1 class="text-center"> <strong>I tuoi appartamenti</strong></h1>
+            </div>
+        </div>
+    <div class="container">
+        <div class="row py-3 d-flex justify-content-around">
+            
+            @foreach ($apartments as $apartment)
+            
+            <div class="col-5 m-1">
+                <div class="row my-1 _border _apartment bg-white">
+                    <div class="col-5 py-3">
+                        @if (!str_starts_with($apartment->image ,'http'))
+                             <img src="{{asset('storage/'.$apartment->image)}}" class="img-fluid p-1"  alt="{{$apartment->name}}">
+                        @else
+                            <img src="{{$apartment->image}}" class="img-fluid" alt="{{$apartment->name}}">
+                         @endif 
+                    </div>
+                    <div class="col-7 py-3">
+                        <div class="">
+                            <h5 class="text-capitalize">{{ $apartment->title }}</h5>
+                            <p class="text-capitalize">{{ $apartment->city }}, {{ $apartment->region }}</p>
+                            <p class="text-capitalize">{{ $apartment->address }}</p>
+                            <a href="{{ route('admin.apartments.show', $apartment->id) }}" class="btn btn-primary _btn-color">Visualizza</a>
+                          </div>
                     </div>
                 </div>
-                @endforeach
-        </div>
-        <div class="col-12">
-            {{$apartments->links()}}
-        </div>
+            
+                                
+                
+            </div>
+            @endforeach
     </div>
+    <div class="col-12">
+        {{$apartments->links()}}
+    </div>
+    </div>
+        
+    
 @endsection
 
 
