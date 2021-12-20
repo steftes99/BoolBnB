@@ -34,14 +34,14 @@ class OrderController extends Controller
         if($result->success){
             $data = [
                 'success'=> true,
-                'messagge'=>'transazione eseguita con successo'
+                'messagge'=>'Transazione eseguita con successo'
             ];
             return response()->json($data , 200);
 
         }else{
             $data = [
                 'success'=> false,
-                'messagge'=>'transazione fallita'
+                'messagge'=>'Transazione fallita'
             ];
 
             return response()->json($data, 401);
