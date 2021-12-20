@@ -14816,6 +14816,12 @@ h6 {
   overflow-y: auto;
 }
 
+.wrapper_h {
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+}
+
 ._border-register {
   border: 1px solid #e7717d;
 }
