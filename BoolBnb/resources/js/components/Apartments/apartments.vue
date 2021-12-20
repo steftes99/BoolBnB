@@ -125,6 +125,38 @@ import Apartment from './apartment';
                 var d = R * c; // Distance in km
                 return d;
                 },
+                
+
+                createMarker() {
+                    this.apartments.forEach((element) =>{
+
+                        if(this.getDistanceFromLatLonInKm(this.my_lat,this.my_long,element.lat,element.long) <20  && 
+                         this.compareFacilities(element.facilities,this.searchFacilities) == true ){
+            var markerElement = document.createElement('div');
+            markerElement.className = 'marker';
+
+            var markerContentElement = document.createElement('div');
+            markerContentElement.className = 'marker-content';
+            markerContentElement.style.backgroundColor = '#e7717d';
+            markerElement.appendChild(markerContentElement);
+
+            var iconElement = document.createElement('div');
+            iconElement.className = 'marker-icon';
+            iconElement.style.backgroundImage =
+                'url(https://www.downloadclipart.net/large/60667-small-house-clipart.png)';
+            markerContentElement.appendChild(iconElement);
+
+            var popup = new tt.Popup({offset: 30})
+            .setText(
+                element.title + ' ' + element.address);
+            // add marker to map
+            new tt.Marker({element: markerElement, anchor: 'bottom'})
+                .setLngLat([element.long, element.lat])
+                .setPopup(popup)
+                .addTo(this.map);
+
+                         }})
+        },
 
                 newMarker(){
                     this.apartments.forEach((element) =>{
@@ -137,6 +169,18 @@ import Apartment from './apartment';
                             marker = new tt.Marker()
                             .setLngLat([element.long, element.lat])
                             .addTo(this.map)
+                            var popupOffsets = {
+                                top: [0, 0],
+                                bottom: [0, -70],
+                                'bottom-right': [0, -70],
+                                'bottom-left': [0, -70],
+                                left: [25, -35],
+                                right: [-25, -35]
+                                }
+
+                            var popup = new tt.Popup({offset: popupOffsets })
+                            .setHTML(element.address)
+                            marker.setPopup(popup).togglePopup();
                         }                                       
                     })                
                 },
@@ -161,8 +205,8 @@ import Apartment from './apartment';
                             this.map.addControl(new tt.FullscreenControl());
                             this.map.addControl(new tt.NavigationControl());
 
-                            
-                            this.newMarker()
+                            this.createMarker();
+                            /* this.newMarker() */
 
                         }.bind(this));
             }, 
