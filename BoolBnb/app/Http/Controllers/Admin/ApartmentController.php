@@ -140,7 +140,7 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment, Gateway $gateway)
+    public function show(Apartment $apartment)
     {
         $facilities = Facility::all();
 
