@@ -25,20 +25,20 @@
                     @load="onLoad"
                     >
                         <template #button="slotProps">
-                            <button @click="slotProps.submit" ref="paymentBtnRef"></button>
+                            <a @click="slotProps.submit" ref="paymentBtnRef"/>
                         </template>
                 </v-braintree>
             </div>
             <button
                 v-if="!disableBuyButton"
-                class="btn btn-success"
+                class="btn _btn-color"
                 @click.prevent="beforeBuy"
                 >
                 Procedi con l'acquisto 
             </button>
             <button
                 v-else
-                class="btn btn-info"
+                class="btn _btn-color-2"
                 >
                 {{
                     loadingPayment ? 'Loading...' : 'Procedi con l\'acquisto '
@@ -114,7 +114,7 @@ export default {
         this.form.token = nonce;
 
         console.log(nonce);
-        this.beforeBuy();
+        this.buy()
         },
         onError (error) {
         let message = error.message;
@@ -128,7 +128,7 @@ export default {
         beforeBuy(){
              this.$refs.paymentBtnRef.click();
         },
-        buy(){
+        async buy(){
             this.loading = false;
             axios.post("http://localhost:8000/api/make/payment", {...this.form})
             .then((response) => {

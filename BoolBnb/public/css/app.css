@@ -14798,6 +14798,14 @@ body {
   margin: 0 auto;
 }
 
+._gray {
+  border: 2px solid #e7717d;
+}
+._gray:hover {
+  background-color: #e7717d;
+  color: white;
+}
+
 .jumbo {
   background: #86b3d1;
   background: linear-gradient(90deg, #86b3d1 0%, #e0737e 57%, #f8f9fa 100%);
