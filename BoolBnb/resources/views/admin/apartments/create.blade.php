@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="background p-5">
-        <div class="container bg-light p-5 rounded-lg justify-content-center">
-            <h1 class="dark-gray">Inserisci un nuovo appartamento</h1>
+        <div class="container bg-light p-2 p-md-5 rounded-lg justify-content-center">
+            <h2 class="dark-gray">Inserisci un nuovo appartamento</h2>
             @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

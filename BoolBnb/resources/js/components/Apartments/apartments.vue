@@ -152,7 +152,8 @@ import Apartment from './apartment';
                     .setText(
                         element.title + ' ' + element.address);
                     // add marker to map
-                    new tt.Marker({element: markerElement, anchor: 'bottom'})
+                    var marker;
+                    marker=new tt.Marker({element: markerElement, anchor: 'bottom'})
                         .setLngLat([element.long, element.lat])
                         .setPopup(popup)
                         .addTo(this.map);

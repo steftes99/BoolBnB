@@ -19,11 +19,11 @@
                   <p class="card-text mt-2"><strong>Bagni: </strong>{{$apartment->bathrooms}}</p>
                   <p class="card-text"><strong>Metri quadri: </strong>{{$apartment->square}}</p>
                   
-                  <div class="d-flex align-items-center">
+                  <div class="align-items-center">
   
                     @foreach ($apartment->facilities as $facility)
                       
-                        <p class="mr-1 text-capitalize">{{ $facility->name }}, </p>
+                        <span class="mr-1 text-capitalize">{{ $facility->name }}, </span>
     
                   
                     @endforeach
@@ -53,13 +53,13 @@
               </div>
               @if ( Auth::user()->id == $apartment->user->id)
               {{-- Braintree container --}}
-              <div class="col-12 p-5">
+              <div class="col-12">
                 <div id="appBraintree"></div>                     
               </div>
               {{-- Map conatiner --}}
-                <div class="col-12 p-5">
+                {{-- <div class="col-12 p-5">
                   <div id="dropin-container"></div>              
-                </div>
+                </div> --}}
               @endif
                 
 

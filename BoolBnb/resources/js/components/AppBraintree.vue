@@ -2,7 +2,7 @@
   <div id="braintree">
         <div class="row justify-content-center align-items-center">
             <div class="col-12 my-2">
-                <h2 class="text-center">Sponsorizza il tuo appartamento</h2>
+                <h3 class="text-center">Sponsorizza il tuo appartamento</h3>
             </div>
             
             <SponsorshipCard v-for="sponsorship in sponsorships" :key="sponsorship.id" :sponsorship="sponsorship" @token="tokenized" @duration="duration" @price="price" /> 
