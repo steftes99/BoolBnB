@@ -29,16 +29,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-6 p-1">
+                <div id="map" class="map"></div>
+            </div>
+            <div class="col-12 col-md-6">
                 <div class="row">
                     <div class="col-12 _scroll">
                         <Apartment v-for="apartment in searchedApartment " :key="apartment.id" :apartment="apartment"/>
                     </div>
                 </div>
                 
-            </div>
-            <div class="col-6 p-1">
-                <div id="map" class="map"></div>
             </div>
         </div>
         
@@ -282,7 +282,8 @@ import Apartment from './apartment';
     }
     .map{
         width: 100%;
-        height: 60vh;
+        height: 450px;
+        margin-bottom: 20px;
     }
 </style>
 

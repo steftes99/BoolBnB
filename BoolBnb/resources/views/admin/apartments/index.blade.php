@@ -18,7 +18,7 @@
             
             @foreach ($apartments as $apartment)
             
-            <div class="col-5 m-1">
+            <div class="col-md-5 col-12 m-1">
                 <div class="row my-1 _border _apartment bg-white">
                     <div class="col-5 py-3">
                         @if (!str_starts_with($apartment->image ,'http'))
@@ -36,9 +36,6 @@
                           </div>
                     </div>
                 </div>
-            
-                                
-                
             </div>
             @endforeach
     </div>

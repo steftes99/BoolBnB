@@ -25,11 +25,11 @@
                   <span class="card-text"><strong>Stanze: </strong>{{$apartment->rooms}}</span>
                   <p class="card-text mt-2"><strong>Bagni: </strong>{{$apartment->bathrooms}}</p>
                   <p class="card-text"><strong>Metri quadri: </strong>{{$apartment->square}}</p>
-                  <div class="d-flex align-items-center">
+                  <div class=" align-items-center">
   
                   @foreach ($apartment->facilities as $facility)
                     
-                      <p class="mr-1 text-capitalize">{{ $facility->name }}, </p>
+                      <span class="mr-1 text-capitalize">{{ $facility->name }}, </span>
   
                 
                   @endforeach
@@ -52,7 +52,7 @@
         </div>
         <div class="container">
           <div class="row">
-            <div class="col-12" id="maps">
+            <div class="col-12 my-3" id="maps">
               <div id="map" style="width: 100%; height: 100%;"></div>
             </div>
           </div>
