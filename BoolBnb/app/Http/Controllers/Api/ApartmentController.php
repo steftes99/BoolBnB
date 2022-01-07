@@ -7,6 +7,8 @@ use App\Models\Apartment;
 use App\Models\Facility;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -82,7 +84,32 @@ class ApartmentController extends Controller
     {
        $data = $request->all();
        
-       if(array_key_exists('sponsorship', $data)) $apartment->sponsorships()->sync($data['sponsorship']);
+       if(array_key_exists('sponsorship', $data)) {
+           /* $apartment->sponsorships()->sync($data['sponsorship']); */
+           
+            $apartment->sponsorships()->detach();
+
+            if($data['sponsorship'] == 1){
+                $apartment->sponsorships()->attach($apartment ,[
+                    'sponsorship_id' => $data['sponsorship'],
+                    'start_date' => Carbon::now(),
+                    'end_date' => Carbon::now()->addHours(24),
+                ]);
+            }elseif($data['sponsorship'] == 2){
+                $apartment->sponsorships()->attach($apartment ,[
+                    'sponsorship_id' => $data['sponsorship'],
+                    'start_date' => Carbon::now(),
+                    'end_date' => Carbon::now()->addHours(72),
+                ]);
+            }elseif($data['sponsorship'] == 3){
+                $apartment->sponsorships()->attach($apartment ,[
+                    'sponsorship_id' => $data['sponsorship'],
+                    'start_date' => Carbon::now(),
+                    'end_date' => Carbon::now()->addHours(144),
+                ]);
+            }
+            
+       }
     }
 
     /**

@@ -135,7 +135,7 @@ export default {
         async buy(){
             this.disableBuyButton = true;
             this.loading = true;
-            console.log(this.form);
+            /* console.log(this.form); */
             axios.post("http://localhost:8000/api/make/payment", {...this.form})
             .then((response) => {
             let resp = response.data;
@@ -164,7 +164,7 @@ export default {
         async addSponsorships(){
             try {
               let response = await axios.patch(`http://localhost:8000/api/api/apartments/${apartmentIds}`,{...this.form})
-              console.log(response);  
+              /* console.log(response); */  
             } catch (error) {
                 console.log(error);
             } 
