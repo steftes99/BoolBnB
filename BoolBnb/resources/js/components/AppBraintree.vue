@@ -58,6 +58,8 @@ import vuebraintree from 'vue-braintree';
 
 Vue.use(vuebraintree);
 
+const apartmentIds = document.getElementById('apartment_id').value;
+
 export default {
     name: "appBraintree",
     data() {
@@ -73,8 +75,9 @@ export default {
             response:'',
             form:{
                 token: '',
-                sponsorship:''
+                sponsorship:'',
             }
+
         };
     },
     mounted() {
@@ -132,6 +135,7 @@ export default {
         async buy(){
             this.disableBuyButton = true;
             this.loading = true;
+            console.log(this.form);
             axios.post("http://localhost:8000/api/make/payment", {...this.form})
             .then((response) => {
             let resp = response.data;
@@ -146,6 +150,7 @@ export default {
                 this.payment = false;
 
             });
+            this.addSponsorships();
         },
         price(price){
             this.prices = price;
@@ -156,6 +161,14 @@ export default {
         onLoad(){
             this.disableBuyButton = false;
         },
+        async addSponsorships(){
+            try {
+              let response = await axios.patch(`http://localhost:8000/api/api/apartments/${apartmentIds}`,{...this.form})
+              console.log(response);  
+            } catch (error) {
+                console.log(error);
+            } 
+        }
     },
 }
 </script>

@@ -80,7 +80,9 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        
+       $data = $request->all();
+       
+       if(array_key_exists('sponsorship', $data)) $apartment->sponsorships()->sync($data['sponsorship']);
     }
 
     /**

@@ -52,6 +52,7 @@
                 <a href="{{route('admin.apartments.index')}}" class="_link-pink">Torna indietro</a>
               </div>
               @if ( Auth::user()->id == $apartment->user->id)
+              <input type="text" name="apartment_id" id="apartment_id" class="d-none" value={{$apartment->id}} hidden>
               {{-- Braintree container --}}
               <div class="col-12">
                 <div id="appBraintree"></div>                     
@@ -61,7 +62,6 @@
                   <div id="dropin-container"></div>              
                 </div> --}}
               @endif
-                
 
               <div class="col-12"  id="maps">
                 <div id="map" style="width: 100%; height:100%;"></div>
@@ -77,7 +77,6 @@
 @section('scripts')
 <script src="{{ asset('js/appBraintree.js') }}"></script>
 <script type="text/javascript"> 
-
 
 let lat = {{$apartment->lat}}
 let lon = {{$apartment->long}}
