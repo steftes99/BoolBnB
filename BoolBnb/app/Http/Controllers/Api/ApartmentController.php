@@ -110,6 +110,7 @@ class ApartmentController extends Controller
             }
             
        }
+       return response('',200);
     }
 
     /**

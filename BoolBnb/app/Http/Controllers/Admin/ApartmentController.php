@@ -8,6 +8,7 @@ use App\Models\Facility;
 use App\Models\Sponsorship;
 use Braintree\Gateway;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -37,6 +38,37 @@ class ApartmentController extends Controller
 
         // SELECT * FROM 'apartments' WHERE user_id = user_id dell'utente corrente
         $apartments = Apartment::where('user_id', Auth::user()->id)->paginate(6);
+
+        $sponsorshipDate = 0;
+        $sponsorshipD = '0000-00-00';
+        
+        /* foreach($apartments as $apartment ){
+            if($apartment->sponsorships){
+                foreach($apartment->sponsorships as $sponsorship){
+                    $sponsorshipD = $sponsorship->pivot->end_date;
+    
+                    $timeNow = "2022-01-15";
+    
+                    if($sponsorshipD !== '0000-00-00'){
+                        $sponsorshipDate = date("d-m-Y",strtotime($sponsorshipD));
+                        $tn = str_replace('-','',$timeNow);
+                        $sn = str_replace('-','',$sponsorshipD);
+                        
+                        if($tn > $sn){
+                            $apartments->sponsorships()->detach();
+                        }
+                    }else{
+                        $sponsorshipDate = 0;
+                    }
+                }
+            }
+        } */
+        
+        
+        /* $timeNow = Carbon::now(); */
+        
+
+
     
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -153,7 +185,30 @@ class ApartmentController extends Controller
             $imagePrefix = $apartment->image;
         }
 
-        return view('admin.apartments.show', compact('apartment', 'facilities', 'imagePrefix','sponsorships'));
+        $sponsorshipDate = 0;
+        $sponsorshipD = '0000-00-00';
+        
+        foreach($apartment->sponsorships as $sponsorship){
+            $sponsorshipD = $sponsorship->pivot->end_date;
+        }
+        
+        $timeNow = Carbon::now();
+        /* $timeNow = "2022-01-08"; */
+
+        if($sponsorshipD !== '0000-00-00'){
+            $sponsorshipDate = date("d-m-Y",strtotime($sponsorshipD));
+            $tn = str_replace('-','',$timeNow);
+            $sn = str_replace('-','',$sponsorshipD);
+            
+            if($tn > $sn){
+                $apartment->sponsorships()->detach();
+            }
+        }else{
+            $sponsorshipDate = 0;
+        }
+        
+
+        return view('admin.apartments.show', compact('apartment', 'facilities', 'imagePrefix','sponsorships','sponsorshipDate'));
     }
 
     /**
